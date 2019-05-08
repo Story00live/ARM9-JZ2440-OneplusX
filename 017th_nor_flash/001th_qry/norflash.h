@@ -1,0 +1,21 @@
+#ifndef __S3C2440_NOR_FLASH_H
+#define   __S3C2440_NOR_FLASH_H
+
+#include "s3c2440_soc.h"
+
+#define	NOR_FLASH_BASE_ADDR				0x00000000
+#define	NOR_FLASH_BASE_ADDR1			0x00000000
+#define	NOR_FLASH_BASE_ADDR2			0x00000200
+#define	NOR_FLASH_BASE_ADDR3			0x00000400
+#define	NOR_FLASH_BASE_ADDR4			0x00000600
+#define	NOR_FLASH_BASE_ADDR5			0x00000800
+#define	NOR_FLASH_BASE_ADDR6			0x00000A00
+#define	NOR_FLASH_BASE_ADDR7			0x00000C00
+#define	NOR_FLASH_BASE_ADDR8			0x00000E00
+#define	NOR_FLASH_BYTE_SIZE				0x00200000
+
+void S3C2440_NorFlashInitialized(void);										//NorFlash初始化
+
+void S3C2440_NorFlashTest(void);											//NorFlash测试
+
+#endif /* __S3C2440_NOR_FLASH_H */

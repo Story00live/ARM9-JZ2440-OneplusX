@@ -1,0 +1,112 @@
+{
+	"folders": [
+		{
+			"path": "001th_led_on"
+		},
+		{
+			"path": "002th_led_c"
+		},
+		{
+			"path": "003th_led_params"
+		},
+		{
+			"path": "004th_leds"
+		},
+		{
+			"path": "005th_key_led"
+		},
+		{
+			"path": "006th_gcc_pointer_Makefile"
+		},
+		{
+			"path": "007th_clk"
+		},
+		{
+			"path": "008th_uart"
+		},
+		{
+			"path": "009th_nor_access_cycle"
+		},
+		{
+			"path": "010th_sdram"
+		},
+		{
+			"path": "011th_relocate"
+		},
+		{
+			"path": "012th_thumb"
+		},
+		{
+			"path": "013th_und_exception"
+		},
+		{
+			"path": "014th_swi_exception"
+		},
+		{
+			"path": "015th_exti"
+		},
+		{
+			"path": "016th_timer"
+		},
+		{
+			"path": "017th_nor_flash"
+		},
+		{
+			"path": "018th_nand_flash"
+		},
+		{
+			"path": "019th_makefile_ch"
+		},
+		{
+			"path": "020th_lcd"
+		}
+	],
+	"settings": {
+		// 当打开文件时，将基于文件内容检测 "editor.tabSize" 和 "editor.insertSpaces"。
+		"editor.detectIndentation": false,
+
+		// 以像素为单位控制字号。
+		"editor.fontSize": 16,
+
+		// 控制字体系列。
+		"editor.fontFamily": "'Courier New', monospace",
+
+		// 一个制表符等于的空格数。该设置在 "editor.detectIndentation" 启用时根据文件内容可能会被覆盖。
+		"editor.tabSize": 5,
+
+		// 按 Tab 键时插入空格。该设置在 "editor.detectIndentation" 启用时根据文件内容可能会被覆盖。
+		"editor.insertSpaces": false,
+
+		// 控制何时自动保存已更新文件。接受的值: "off"、"afterDelay"、"onFocusChange" (编辑器失去焦点)、"onWindowChange" (窗口失去焦点)。如果设置为 "afterDelay"，可在 "files.autoSaveDelay" 中配置延迟时间。
+		"files.autoSave": "off",
+		
+		// 控制在多少毫秒后自动保存更改过的文件。仅在“files.autoSave”设置为“afterDelay”时适用。
+		"files.autoSaveDelay": 500,
+		
+		"files.associations": {
+			"main.lds": "arm",
+			"stdio.h": "c",
+			"s3c2440_soc.h": "c",
+			"stdlib.h": "c",
+			"string.h": "c",
+			"stdint.h": "c",
+			"cstdint": "c",
+			"c++config.h": "c",
+			"typeinfo": "c",
+			"my_printf.h": "c",
+			"stdarg.h": "c",
+			"uart.h": "c",
+			"sdram.lds": "arm",
+			"sdram.h": "c",
+			"README.md": "arm",
+			"led.h": "c",
+			"interrupt.h": "c",
+			"exti.h": "c",
+			"timer.h": "c",
+			"norflashdemo.h": "c",
+			"s3c2440_lcd_controller.h": "c",
+			"lcd_4.3.h": "c"
+		},
+		"C_Cpp.default.cStandard": "c99",
+	}
+}

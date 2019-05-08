@@ -1,0 +1,613 @@
+
+main.elf:     file format elf32-littlearm
+
+Disassembly of section .text:
+
+30000000 <_start>:
+30000000:	e3a00453 	mov	r0, #1392508928	; 0x53000000
+30000004:	e3a01000 	mov	r1, #0	; 0x0
+30000008:	e5801000 	str	r1, [r0]
+3000000c:	e3a00313 	mov	r0, #1275068416	; 0x4c000000
+30000010:	e3e01000 	mvn	r1, #0	; 0x0
+30000014:	e5801000 	str	r1, [r0]
+30000018:	e59f0060 	ldr	r0, [pc, #96]	; 30000080 <.text+0x80>
+3000001c:	e3a01005 	mov	r1, #5	; 0x5
+30000020:	e5801000 	str	r1, [r0]
+30000024:	ee110f10 	mrc	15, 0, r0, cr1, cr0, {0}
+30000028:	e3800103 	orr	r0, r0, #-1073741824	; 0xc0000000
+3000002c:	ee010f10 	mcr	15, 0, r0, cr1, cr0, {0}
+30000030:	e59f004c 	ldr	r0, [pc, #76]	; 30000084 <.text+0x84>
+30000034:	e59f104c 	ldr	r1, [pc, #76]	; 30000088 <.text+0x88>
+30000038:	e5801000 	str	r1, [r0]
+3000003c:	e3a01000 	mov	r1, #0	; 0x0
+30000040:	e5910000 	ldr	r0, [r1]
+30000044:	e5811000 	str	r1, [r1]
+30000048:	e5912000 	ldr	r2, [r1]
+3000004c:	e1510002 	cmp	r1, r2
+30000050:	e59fd034 	ldr	sp, [pc, #52]	; 3000008c <.text+0x8c>
+30000054:	03a0da01 	moveq	sp, #4096	; 0x1000
+30000058:	05810000 	streq	r0, [r1]
+3000005c:	e28f0004 	add	r0, pc, #4	; 0x4
+30000060:	e2800001 	add	r0, r0, #1	; 0x1
+30000064:	e12fff10 	bx	r0
+
+30000068 <thumb_func>:
+30000068:	f8daf000 	bl	30000220 <S3C2440_NorFlashInitialized>
+3000006c:	f8eef000 	bl	3000024c <S3C2440_SDRAMInitialized>
+30000070:	f942f000 	bl	300002f8 <S3C2440_SDRAM_CopyCodeData>
+30000074:	f968f000 	bl	30000348 <S3C2440_SDRAM_CleanBssData>
+30000078:	4805      	ldr	r0, [pc, #20]	(30000090 <.text+0x90>)
+3000007a:	4687      	mov	pc, r0
+
+3000007c <halt>:
+3000007c:	e7fe      	b	3000007c <halt>
+3000007e:	0000      	lsl	r0, r0, #0
+30000080:	0014      	lsl	r4, r2, #0
+30000082:	4c00      	ldr	r4, [pc, #0]	(30000084 <.text+0x84>)
+30000084:	0004      	lsl	r4, r0, #0
+30000086:	4c00      	ldr	r4, [pc, #0]	(30000088 <.text+0x88>)
+30000088:	c011      	stmia	r0!,{r0, r4}
+3000008a:	0005      	lsl	r5, r0, #0
+3000008c:	1000      	asr	r0, r0, #0
+3000008e:	4000      	and	r0, r0
+30000090:	03a9      	lsl	r1, r5, #14
+30000092:	3000      	add	r0, #0
+Disassembly of section .glue_7t:
+
+30000094 <___call_via_r4_from_thumb-0x1>:
+	...
+
+30000095 <___call_via_r4_from_thumb>:
+30000095:	0000      	lsl	r0, r0, #0
+	...
+
+30000098 <___call_via_r4_change_to_arm>:
+30000098:	00000000 	andeq	r0, r0, r0
+	...
+
+3000009d <____umodsi3_from_thumb>:
+3000009d:	0000      	lsl	r0, r0, #0
+	...
+
+300000a0 <____umodsi3_change_to_arm>:
+300000a0:	00000000 	andeq	r0, r0, r0
+	...
+
+300000a5 <____udivsi3_from_thumb>:
+300000a5:	0000      	lsl	r0, r0, #0
+	...
+
+300000a8 <____udivsi3_change_to_arm>:
+300000a8:	00000000 	andeq	r0, r0, r0
+	...
+
+300000ad <___call_via_r2_from_thumb>:
+300000ad:	0000      	lsl	r0, r0, #0
+	...
+
+300000b0 <___call_via_r2_change_to_arm>:
+300000b0:	00000000 	andeq	r0, r0, r0
+Disassembly of section .text.S3C2440_LedInitialized:
+
+300000b4 <S3C2440_LedInitialized>:
+300000b4:	b580      	push	{r7, lr}
+300000b6:	466f      	mov	r7, sp
+300000b8:	4907      	ldr	r1, [pc, #28]	(300000d8 <.text.S3C2440_LedInitialized+0x24>)
+300000ba:	4b07      	ldr	r3, [pc, #28]	(300000d8 <.text.S3C2440_LedInitialized+0x24>)
+300000bc:	681a      	ldr	r2, [r3, #0]
+300000be:	4b07      	ldr	r3, [pc, #28]	(300000dc <.text.S3C2440_LedInitialized+0x28>)
+300000c0:	4013      	and	r3, r2
+300000c2:	600b      	str	r3, [r1, #0]
+300000c4:	4904      	ldr	r1, [pc, #16]	(300000d8 <.text.S3C2440_LedInitialized+0x24>)
+300000c6:	4b04      	ldr	r3, [pc, #16]	(300000d8 <.text.S3C2440_LedInitialized+0x24>)
+300000c8:	681a      	ldr	r2, [r3, #0]
+300000ca:	23a8      	mov	r3, #168
+300000cc:	015b      	lsl	r3, r3, #5
+300000ce:	4313      	orr	r3, r2
+300000d0:	600b      	str	r3, [r1, #0]
+300000d2:	46bd      	mov	sp, r7
+300000d4:	bd80      	pop	{r7, pc}
+300000d6:	0000      	lsl	r0, r0, #0
+300000d8:	0050      	lsl	r0, r2, #1
+300000da:	5600      	ldrsb	r0, [r0, r0]
+300000dc:	c0ff      	stmia	r0!,{r0, r1, r2, r3, r4, r5, r6, r7}
+300000de:	ffff      	second half of BL instruction 0xffff
+Disassembly of section .text.S3C2440_KeyInitialized:
+
+300000e0 <S3C2440_KeyInitialized>:
+300000e0:	b580      	push	{r7, lr}
+300000e2:	466f      	mov	r7, sp
+300000e4:	490b      	ldr	r1, [pc, #44]	(30000114 <.text.S3C2440_KeyInitialized+0x34>)
+300000e6:	4b0b      	ldr	r3, [pc, #44]	(30000114 <.text.S3C2440_KeyInitialized+0x34>)
+300000e8:	681a      	ldr	r2, [r3, #0]
+300000ea:	2333      	mov	r3, #51
+300000ec:	439a      	bic	r2, r3
+300000ee:	1c13      	mov	r3, r2		(add r3, r2, #0)
+300000f0:	600b      	str	r3, [r1, #0]
+300000f2:	4a08      	ldr	r2, [pc, #32]	(30000114 <.text.S3C2440_KeyInitialized+0x34>)
+300000f4:	4b07      	ldr	r3, [pc, #28]	(30000114 <.text.S3C2440_KeyInitialized+0x34>)
+300000f6:	681b      	ldr	r3, [r3, #0]
+300000f8:	6013      	str	r3, [r2, #0]
+300000fa:	4907      	ldr	r1, [pc, #28]	(30000118 <.text.S3C2440_KeyInitialized+0x38>)
+300000fc:	4b06      	ldr	r3, [pc, #24]	(30000118 <.text.S3C2440_KeyInitialized+0x38>)
+300000fe:	681a      	ldr	r2, [r3, #0]
+30000100:	23c0      	mov	r3, #192
+30000102:	439a      	bic	r2, r3
+30000104:	1c13      	mov	r3, r2		(add r3, r2, #0)
+30000106:	600b      	str	r3, [r1, #0]
+30000108:	4a03      	ldr	r2, [pc, #12]	(30000118 <.text.S3C2440_KeyInitialized+0x38>)
+3000010a:	4b03      	ldr	r3, [pc, #12]	(30000118 <.text.S3C2440_KeyInitialized+0x38>)
+3000010c:	681b      	ldr	r3, [r3, #0]
+3000010e:	6013      	str	r3, [r2, #0]
+30000110:	46bd      	mov	sp, r7
+30000112:	bd80      	pop	{r7, pc}
+30000114:	0050      	lsl	r0, r2, #1
+30000116:	5600      	ldrsb	r0, [r0, r0]
+30000118:	0060      	lsl	r0, r4, #1
+3000011a:	5600      	ldrsb	r0, [r0, r0]
+Disassembly of section .text.S3C2440_Uart0Initialized:
+
+3000011c <S3C2440_Uart0Initialized>:
+3000011c:	b580      	push	{r7, lr}
+3000011e:	466f      	mov	r7, sp
+30000120:	491b      	ldr	r1, [pc, #108]	(30000190 <.text.S3C2440_Uart0Initialized+0x74>)
+30000122:	4b1b      	ldr	r3, [pc, #108]	(30000190 <.text.S3C2440_Uart0Initialized+0x74>)
+30000124:	681a      	ldr	r2, [r3, #0]
+30000126:	23f0      	mov	r3, #240
+30000128:	439a      	bic	r2, r3
+3000012a:	1c13      	mov	r3, r2		(add r3, r2, #0)
+3000012c:	600b      	str	r3, [r1, #0]
+3000012e:	4918      	ldr	r1, [pc, #96]	(30000190 <.text.S3C2440_Uart0Initialized+0x74>)
+30000130:	4b17      	ldr	r3, [pc, #92]	(30000190 <.text.S3C2440_Uart0Initialized+0x74>)
+30000132:	681a      	ldr	r2, [r3, #0]
+30000134:	23a0      	mov	r3, #160
+30000136:	4313      	orr	r3, r2
+30000138:	600b      	str	r3, [r1, #0]
+3000013a:	4916      	ldr	r1, [pc, #88]	(30000194 <.text.S3C2440_Uart0Initialized+0x78>)
+3000013c:	4b15      	ldr	r3, [pc, #84]	(30000194 <.text.S3C2440_Uart0Initialized+0x78>)
+3000013e:	681a      	ldr	r2, [r3, #0]
+30000140:	230c      	mov	r3, #12
+30000142:	439a      	bic	r2, r3
+30000144:	1c13      	mov	r3, r2		(add r3, r2, #0)
+30000146:	600b      	str	r3, [r1, #0]
+30000148:	4913      	ldr	r1, [pc, #76]	(30000198 <.text.S3C2440_Uart0Initialized+0x7c>)
+3000014a:	4b13      	ldr	r3, [pc, #76]	(30000198 <.text.S3C2440_Uart0Initialized+0x7c>)
+3000014c:	681a      	ldr	r2, [r3, #0]
+3000014e:	230f      	mov	r3, #15
+30000150:	439a      	bic	r2, r3
+30000152:	1c13      	mov	r3, r2		(add r3, r2, #0)
+30000154:	600b      	str	r3, [r1, #0]
+30000156:	4910      	ldr	r1, [pc, #64]	(30000198 <.text.S3C2440_Uart0Initialized+0x7c>)
+30000158:	4b0f      	ldr	r3, [pc, #60]	(30000198 <.text.S3C2440_Uart0Initialized+0x7c>)
+3000015a:	681a      	ldr	r2, [r3, #0]
+3000015c:	2305      	mov	r3, #5
+3000015e:	4313      	orr	r3, r2
+30000160:	600b      	str	r3, [r1, #0]
+30000162:	4a0e      	ldr	r2, [pc, #56]	(3000019c <.text.S3C2440_Uart0Initialized+0x80>)
+30000164:	231a      	mov	r3, #26
+30000166:	6013      	str	r3, [r2, #0]
+30000168:	22a0      	mov	r2, #160
+3000016a:	05d2      	lsl	r2, r2, #23
+3000016c:	23a0      	mov	r3, #160
+3000016e:	05db      	lsl	r3, r3, #23
+30000170:	6819      	ldr	r1, [r3, #0]
+30000172:	2303      	mov	r3, #3
+30000174:	4399      	bic	r1, r3
+30000176:	1c0b      	mov	r3, r1		(add r3, r1, #0)
+30000178:	6013      	str	r3, [r2, #0]
+3000017a:	22a0      	mov	r2, #160
+3000017c:	05d2      	lsl	r2, r2, #23
+3000017e:	23a0      	mov	r3, #160
+30000180:	05db      	lsl	r3, r3, #23
+30000182:	6819      	ldr	r1, [r3, #0]
+30000184:	2303      	mov	r3, #3
+30000186:	430b      	orr	r3, r1
+30000188:	6013      	str	r3, [r2, #0]
+3000018a:	46bd      	mov	sp, r7
+3000018c:	bd80      	pop	{r7, pc}
+3000018e:	0000      	lsl	r0, r0, #0
+30000190:	0070      	lsl	r0, r6, #1
+30000192:	5600      	ldrsb	r0, [r0, r0]
+30000194:	0078      	lsl	r0, r7, #1
+30000196:	5600      	ldrsb	r0, [r0, r0]
+30000198:	0004      	lsl	r4, r0, #0
+3000019a:	5000      	str	r0, [r0, r0]
+3000019c:	0028      	lsl	r0, r5, #0
+3000019e:	5000      	str	r0, [r0, r0]
+Disassembly of section .text.S3C2440_Uart0_Putchar:
+
+300001a0 <S3C2440_Uart0_Putchar>:
+300001a0:	b580      	push	{r7, lr}
+300001a2:	466f      	mov	r7, sp
+300001a4:	b081      	sub	sp, #4
+300001a6:	1f3b      	sub	r3, r7, #4
+300001a8:	6018      	str	r0, [r3, #0]
+300001aa:	4b08      	ldr	r3, [pc, #32]	(300001cc <.text.S3C2440_Uart0_Putchar+0x2c>)
+300001ac:	681a      	ldr	r2, [r3, #0]
+300001ae:	2304      	mov	r3, #4
+300001b0:	4013      	and	r3, r2
+300001b2:	2b00      	cmp	r3, #0
+300001b4:	d100      	bne	300001b8 <S3C2440_Uart0_Putchar+0x18>
+300001b6:	e7f8      	b	300001aa <S3C2440_Uart0_Putchar+0xa>
+300001b8:	4a05      	ldr	r2, [pc, #20]	(300001d0 <.text.S3C2440_Uart0_Putchar+0x30>)
+300001ba:	1f3b      	sub	r3, r7, #4
+300001bc:	681b      	ldr	r3, [r3, #0]
+300001be:	7013      	strb	r3, [r2, #0]
+300001c0:	1f3b      	sub	r3, r7, #4
+300001c2:	681b      	ldr	r3, [r3, #0]
+300001c4:	1c18      	mov	r0, r3		(add r0, r3, #0)
+300001c6:	46bd      	mov	sp, r7
+300001c8:	bd80      	pop	{r7, pc}
+300001ca:	0000      	lsl	r0, r0, #0
+300001cc:	0010      	lsl	r0, r2, #0
+300001ce:	5000      	str	r0, [r0, r0]
+300001d0:	0020      	lsl	r0, r4, #0
+300001d2:	5000      	str	r0, [r0, r0]
+Disassembly of section .text.S3C2440_Uart0_Puts:
+
+300001d4 <S3C2440_Uart0_Puts>:
+300001d4:	b580      	push	{r7, lr}
+300001d6:	466f      	mov	r7, sp
+300001d8:	b082      	sub	sp, #8
+300001da:	1f3b      	sub	r3, r7, #4
+300001dc:	6018      	str	r0, [r3, #0]
+300001de:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+300001e0:	3a08      	sub	r2, #8
+300001e2:	2300      	mov	r3, #0
+300001e4:	6013      	str	r3, [r2, #0]
+300001e6:	1f3b      	sub	r3, r7, #4
+300001e8:	681b      	ldr	r3, [r3, #0]
+300001ea:	781b      	ldrb	r3, [r3, #0]
+300001ec:	2b00      	cmp	r3, #0
+300001ee:	d010      	beq	30000212 <S3C2440_Uart0_Puts+0x3e>
+300001f0:	1f39      	sub	r1, r7, #4
+300001f2:	680b      	ldr	r3, [r1, #0]
+300001f4:	1c1a      	mov	r2, r3		(add r2, r3, #0)
+300001f6:	7812      	ldrb	r2, [r2, #0]
+300001f8:	3301      	add	r3, #1
+300001fa:	600b      	str	r3, [r1, #0]
+300001fc:	1c10      	mov	r0, r2		(add r0, r2, #0)
+300001fe:	ffcff7ff 	bl	300001a0 <S3C2440_Uart0_Putchar>
+30000202:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+30000204:	3a08      	sub	r2, #8
+30000206:	1c3b      	mov	r3, r7		(add r3, r7, #0)
+30000208:	3b08      	sub	r3, #8
+3000020a:	681b      	ldr	r3, [r3, #0]
+3000020c:	3301      	add	r3, #1
+3000020e:	6013      	str	r3, [r2, #0]
+30000210:	e7e9      	b	300001e6 <S3C2440_Uart0_Puts+0x12>
+30000212:	1c3b      	mov	r3, r7		(add r3, r7, #0)
+30000214:	3b08      	sub	r3, #8
+30000216:	681b      	ldr	r3, [r3, #0]
+30000218:	1c18      	mov	r0, r3		(add r0, r3, #0)
+3000021a:	46bd      	mov	sp, r7
+3000021c:	bd80      	pop	{r7, pc}
+3000021e:	46c0      	nop			(mov r8, r8)
+Disassembly of section .text.S3C2440_NorFlashInitialized:
+
+30000220 <S3C2440_NorFlashInitialized>:
+30000220:	b580      	push	{r7, lr}
+30000222:	466f      	mov	r7, sp
+30000224:	4907      	ldr	r1, [pc, #28]	(30000244 <.text.S3C2440_NorFlashInitialized+0x24>)
+30000226:	4b07      	ldr	r3, [pc, #28]	(30000244 <.text.S3C2440_NorFlashInitialized+0x24>)
+30000228:	681a      	ldr	r2, [r3, #0]
+3000022a:	23e0      	mov	r3, #224
+3000022c:	00db      	lsl	r3, r3, #3
+3000022e:	4313      	orr	r3, r2
+30000230:	600b      	str	r3, [r1, #0]
+30000232:	4904      	ldr	r1, [pc, #16]	(30000244 <.text.S3C2440_NorFlashInitialized+0x24>)
+30000234:	4b03      	ldr	r3, [pc, #12]	(30000244 <.text.S3C2440_NorFlashInitialized+0x24>)
+30000236:	681a      	ldr	r2, [r3, #0]
+30000238:	4b03      	ldr	r3, [pc, #12]	(30000248 <.text.S3C2440_NorFlashInitialized+0x28>)
+3000023a:	4013      	and	r3, r2
+3000023c:	600b      	str	r3, [r1, #0]
+3000023e:	46bd      	mov	sp, r7
+30000240:	bd80      	pop	{r7, pc}
+30000242:	0000      	lsl	r0, r0, #0
+30000244:	0004      	lsl	r4, r0, #0
+30000246:	4800      	ldr	r0, [pc, #0]	(30000248 <.text.S3C2440_NorFlashInitialized+0x28>)
+30000248:	fdff      	second half of BL instruction 0xfdff
+3000024a:	ffff      	second half of BL instruction 0xffff
+Disassembly of section .text.S3C2440_SDRAMInitialized:
+
+3000024c <S3C2440_SDRAMInitialized>:
+3000024c:	b580      	push	{r7, lr}
+3000024e:	466f      	mov	r7, sp
+30000250:	2290      	mov	r2, #144
+30000252:	05d2      	lsl	r2, r2, #23
+30000254:	2390      	mov	r3, #144
+30000256:	05db      	lsl	r3, r3, #23
+30000258:	6819      	ldr	r1, [r3, #0]
+3000025a:	4b1d      	ldr	r3, [pc, #116]	(300002d0 <.text.S3C2440_SDRAMInitialized+0x84>)
+3000025c:	400b      	and	r3, r1
+3000025e:	6013      	str	r3, [r2, #0]
+30000260:	2290      	mov	r2, #144
+30000262:	05d2      	lsl	r2, r2, #23
+30000264:	2390      	mov	r3, #144
+30000266:	05db      	lsl	r3, r3, #23
+30000268:	681b      	ldr	r3, [r3, #0]
+3000026a:	011b      	lsl	r3, r3, #4
+3000026c:	091b      	lsr	r3, r3, #4
+3000026e:	6013      	str	r3, [r2, #0]
+30000270:	2290      	mov	r2, #144
+30000272:	05d2      	lsl	r2, r2, #23
+30000274:	2390      	mov	r3, #144
+30000276:	05db      	lsl	r3, r3, #23
+30000278:	6819      	ldr	r1, [r3, #0]
+3000027a:	2388      	mov	r3, #136
+3000027c:	059b      	lsl	r3, r3, #22
+3000027e:	430b      	orr	r3, r1
+30000280:	6013      	str	r3, [r2, #0]
+30000282:	4914      	ldr	r1, [pc, #80]	(300002d4 <.text.S3C2440_SDRAMInitialized+0x88>)
+30000284:	4b13      	ldr	r3, [pc, #76]	(300002d4 <.text.S3C2440_SDRAMInitialized+0x88>)
+30000286:	681a      	ldr	r2, [r3, #0]
+30000288:	4b13      	ldr	r3, [pc, #76]	(300002d8 <.text.S3C2440_SDRAMInitialized+0x8c>)
+3000028a:	4013      	and	r3, r2
+3000028c:	600b      	str	r3, [r1, #0]
+3000028e:	4911      	ldr	r1, [pc, #68]	(300002d4 <.text.S3C2440_SDRAMInitialized+0x88>)
+30000290:	4b10      	ldr	r3, [pc, #64]	(300002d4 <.text.S3C2440_SDRAMInitialized+0x88>)
+30000292:	681a      	ldr	r2, [r3, #0]
+30000294:	4b11      	ldr	r3, [pc, #68]	(300002dc <.text.S3C2440_SDRAMInitialized+0x90>)
+30000296:	4313      	orr	r3, r2
+30000298:	600b      	str	r3, [r1, #0]
+3000029a:	4911      	ldr	r1, [pc, #68]	(300002e0 <.text.S3C2440_SDRAMInitialized+0x94>)
+3000029c:	4b10      	ldr	r3, [pc, #64]	(300002e0 <.text.S3C2440_SDRAMInitialized+0x94>)
+3000029e:	681a      	ldr	r2, [r3, #0]
+300002a0:	4b0d      	ldr	r3, [pc, #52]	(300002d8 <.text.S3C2440_SDRAMInitialized+0x8c>)
+300002a2:	4013      	and	r3, r2
+300002a4:	600b      	str	r3, [r1, #0]
+300002a6:	490e      	ldr	r1, [pc, #56]	(300002e0 <.text.S3C2440_SDRAMInitialized+0x94>)
+300002a8:	4b0d      	ldr	r3, [pc, #52]	(300002e0 <.text.S3C2440_SDRAMInitialized+0x94>)
+300002aa:	681a      	ldr	r2, [r3, #0]
+300002ac:	4b0b      	ldr	r3, [pc, #44]	(300002dc <.text.S3C2440_SDRAMInitialized+0x90>)
+300002ae:	4313      	orr	r3, r2
+300002b0:	600b      	str	r3, [r1, #0]
+300002b2:	4a0c      	ldr	r2, [pc, #48]	(300002e4 <.text.S3C2440_SDRAMInitialized+0x98>)
+300002b4:	4b0c      	ldr	r3, [pc, #48]	(300002e8 <.text.S3C2440_SDRAMInitialized+0x9c>)
+300002b6:	6013      	str	r3, [r2, #0]
+300002b8:	4a0c      	ldr	r2, [pc, #48]	(300002ec <.text.S3C2440_SDRAMInitialized+0xa0>)
+300002ba:	23b1      	mov	r3, #177
+300002bc:	6013      	str	r3, [r2, #0]
+300002be:	4a0c      	ldr	r2, [pc, #48]	(300002f0 <.text.S3C2440_SDRAMInitialized+0xa4>)
+300002c0:	2320      	mov	r3, #32
+300002c2:	6013      	str	r3, [r2, #0]
+300002c4:	4a0b      	ldr	r2, [pc, #44]	(300002f4 <.text.S3C2440_SDRAMInitialized+0xa8>)
+300002c6:	2320      	mov	r3, #32
+300002c8:	6013      	str	r3, [r2, #0]
+300002ca:	46bd      	mov	sp, r7
+300002cc:	bd80      	pop	{r7, pc}
+300002ce:	0000      	lsl	r0, r0, #0
+300002d0:	ffff      	second half of BL instruction 0xffff
+300002d2:	001cf0ff 	blx	300ff30c <__code_end+0xfee70>
+300002d6:	4800      	ldr	r0, [pc, #0]	(300002d8 <.text.S3C2440_SDRAMInitialized+0x8c>)
+300002d8:	7ff0      	ldrb	r0, [r6, #31]
+300002da:	fffe      	second half of BL instruction 0xfffe
+300002dc:	8001      	strh	r1, [r0, #0]
+300002de:	0001      	lsl	r1, r0, #0
+300002e0:	0020      	lsl	r0, r4, #0
+300002e2:	4800      	ldr	r0, [pc, #0]	(300002e4 <.text.S3C2440_SDRAMInitialized+0x98>)
+300002e4:	0024      	lsl	r4, r4, #0
+300002e6:	4800      	ldr	r0, [pc, #0]	(300002e8 <.text.S3C2440_SDRAMInitialized+0x9c>)
+300002e8:	04f5      	lsl	r5, r6, #19
+300002ea:	0084      	lsl	r4, r0, #2
+300002ec:	0028      	lsl	r0, r5, #0
+300002ee:	4800      	ldr	r0, [pc, #0]	(300002f0 <.text.S3C2440_SDRAMInitialized+0xa4>)
+300002f0:	002c      	lsl	r4, r5, #0
+300002f2:	4800      	ldr	r0, [pc, #0]	(300002f4 <.text.S3C2440_SDRAMInitialized+0xa8>)
+300002f4:	0030      	lsl	r0, r6, #0
+300002f6:	4800      	ldr	r0, [pc, #0]	(300002f8 <S3C2440_SDRAM_CopyCodeData>)
+Disassembly of section .text.S3C2440_SDRAM_CopyCodeData:
+
+300002f8 <S3C2440_SDRAM_CopyCodeData>:
+300002f8:	b590      	push	{r4, r7, lr}
+300002fa:	466f      	mov	r7, sp
+300002fc:	b083      	sub	sp, #12
+300002fe:	1f3a      	sub	r2, r7, #4
+30000300:	4b0f      	ldr	r3, [pc, #60]	(30000340 <.text.S3C2440_SDRAM_CopyCodeData+0x48>)
+30000302:	6013      	str	r3, [r2, #0]
+30000304:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+30000306:	3a08      	sub	r2, #8
+30000308:	4b0e      	ldr	r3, [pc, #56]	(30000344 <.text.S3C2440_SDRAM_CopyCodeData+0x4c>)
+3000030a:	6013      	str	r3, [r2, #0]
+3000030c:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+3000030e:	3a0c      	sub	r2, #12
+30000310:	2300      	mov	r3, #0
+30000312:	6013      	str	r3, [r2, #0]
+30000314:	1f3b      	sub	r3, r7, #4
+30000316:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+30000318:	3a08      	sub	r2, #8
+3000031a:	6819      	ldr	r1, [r3, #0]
+3000031c:	6813      	ldr	r3, [r2, #0]
+3000031e:	4299      	cmp	r1, r3
+30000320:	d20c      	bcs	3000033c <S3C2440_SDRAM_CopyCodeData+0x44>
+30000322:	1f3c      	sub	r4, r7, #4
+30000324:	6822      	ldr	r2, [r4, #0]
+30000326:	1c39      	mov	r1, r7		(add r1, r7, #0)
+30000328:	390c      	sub	r1, #12
+3000032a:	680b      	ldr	r3, [r1, #0]
+3000032c:	6818      	ldr	r0, [r3, #0]
+3000032e:	3304      	add	r3, #4
+30000330:	600b      	str	r3, [r1, #0]
+30000332:	1c13      	mov	r3, r2		(add r3, r2, #0)
+30000334:	6018      	str	r0, [r3, #0]
+30000336:	3204      	add	r2, #4
+30000338:	6022      	str	r2, [r4, #0]
+3000033a:	e7eb      	b	30000314 <S3C2440_SDRAM_CopyCodeData+0x1c>
+3000033c:	46bd      	mov	sp, r7
+3000033e:	bd90      	pop	{r4, r7, pc}
+30000340:	0000      	lsl	r0, r0, #0
+30000342:	3000      	add	r0, #0
+30000344:	049c      	lsl	r4, r3, #18
+30000346:	3000      	add	r0, #0
+Disassembly of section .text.S3C2440_SDRAM_CleanBssData:
+
+30000348 <S3C2440_SDRAM_CleanBssData>:
+30000348:	b580      	push	{r7, lr}
+3000034a:	466f      	mov	r7, sp
+3000034c:	b082      	sub	sp, #8
+3000034e:	1f3a      	sub	r2, r7, #4
+30000350:	4b0b      	ldr	r3, [pc, #44]	(30000380 <.text.S3C2440_SDRAM_CleanBssData+0x38>)
+30000352:	6013      	str	r3, [r2, #0]
+30000354:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+30000356:	3a08      	sub	r2, #8
+30000358:	4b0a      	ldr	r3, [pc, #40]	(30000384 <.text.S3C2440_SDRAM_CleanBssData+0x3c>)
+3000035a:	6013      	str	r3, [r2, #0]
+3000035c:	1f3b      	sub	r3, r7, #4
+3000035e:	1c3a      	mov	r2, r7		(add r2, r7, #0)
+30000360:	3a08      	sub	r2, #8
+30000362:	6819      	ldr	r1, [r3, #0]
+30000364:	6813      	ldr	r3, [r2, #0]
+30000366:	4299      	cmp	r1, r3
+30000368:	d807      	bhi	3000037a <S3C2440_SDRAM_CleanBssData+0x32>
+3000036a:	1f38      	sub	r0, r7, #4
+3000036c:	6803      	ldr	r3, [r0, #0]
+3000036e:	1c19      	mov	r1, r3		(add r1, r3, #0)
+30000370:	2200      	mov	r2, #0
+30000372:	600a      	str	r2, [r1, #0]
+30000374:	3304      	add	r3, #4
+30000376:	6003      	str	r3, [r0, #0]
+30000378:	e7f0      	b	3000035c <S3C2440_SDRAM_CleanBssData+0x14>
+3000037a:	46bd      	mov	sp, r7
+3000037c:	bd80      	pop	{r7, pc}
+3000037e:	0000      	lsl	r0, r0, #0
+30000380:	049c      	lsl	r4, r3, #18
+30000382:	3000      	add	r0, #0
+30000384:	049c      	lsl	r4, r3, #18
+30000386:	3000      	add	r0, #0
+Disassembly of section .text.delay:
+
+30000388 <delay>:
+30000388:	b580      	push	{r7, lr}
+3000038a:	466f      	mov	r7, sp
+3000038c:	b081      	sub	sp, #4
+3000038e:	1f3b      	sub	r3, r7, #4
+30000390:	6018      	str	r0, [r3, #0]
+30000392:	1f3a      	sub	r2, r7, #4
+30000394:	1f3b      	sub	r3, r7, #4
+30000396:	681b      	ldr	r3, [r3, #0]
+30000398:	3b01      	sub	r3, #1
+3000039a:	6013      	str	r3, [r2, #0]
+3000039c:	3301      	add	r3, #1
+3000039e:	d000      	beq	300003a2 <delay+0x1a>
+300003a0:	e7f7      	b	30000392 <delay+0xa>
+300003a2:	46bd      	mov	sp, r7
+300003a4:	bd80      	pop	{r7, pc}
+300003a6:	46c0      	nop			(mov r8, r8)
+Disassembly of section .text.main:
+
+300003a8 <main>:
+300003a8:	b580      	push	{r7, lr}
+300003aa:	466f      	mov	r7, sp
+300003ac:	b082      	sub	sp, #8
+300003ae:	1f3b      	sub	r3, r7, #4
+300003b0:	6018      	str	r0, [r3, #0]
+300003b2:	1c3b      	mov	r3, r7		(add r3, r7, #0)
+300003b4:	3b08      	sub	r3, #8
+300003b6:	6019      	str	r1, [r3, #0]
+300003b8:	fe7cf7ff 	bl	300000b4 <S3C2440_LedInitialized>
+300003bc:	fe90f7ff 	bl	300000e0 <S3C2440_KeyInitialized>
+300003c0:	feacf7ff 	bl	3000011c <S3C2440_Uart0Initialized>
+300003c4:	4b2a      	ldr	r3, [pc, #168]	(30000470 <.text.main+0xc8>)
+300003c6:	681b      	ldr	r3, [r3, #0]
+300003c8:	1c18      	mov	r0, r3		(add r0, r3, #0)
+300003ca:	ff03f7ff 	bl	300001d4 <S3C2440_Uart0_Puts>
+300003ce:	4929      	ldr	r1, [pc, #164]	(30000474 <.text.main+0xcc>)
+300003d0:	4b28      	ldr	r3, [pc, #160]	(30000474 <.text.main+0xcc>)
+300003d2:	681a      	ldr	r2, [r3, #0]
+300003d4:	2310      	mov	r3, #16
+300003d6:	439a      	bic	r2, r3
+300003d8:	1c13      	mov	r3, r2		(add r3, r2, #0)
+300003da:	600b      	str	r3, [r1, #0]
+300003dc:	4925      	ldr	r1, [pc, #148]	(30000474 <.text.main+0xcc>)
+300003de:	4b25      	ldr	r3, [pc, #148]	(30000474 <.text.main+0xcc>)
+300003e0:	681a      	ldr	r2, [r3, #0]
+300003e2:	2320      	mov	r3, #32
+300003e4:	4313      	orr	r3, r2
+300003e6:	600b      	str	r3, [r1, #0]
+300003e8:	4922      	ldr	r1, [pc, #136]	(30000474 <.text.main+0xcc>)
+300003ea:	4b22      	ldr	r3, [pc, #136]	(30000474 <.text.main+0xcc>)
+300003ec:	681a      	ldr	r2, [r3, #0]
+300003ee:	2340      	mov	r3, #64
+300003f0:	4313      	orr	r3, r2
+300003f2:	600b      	str	r3, [r1, #0]
+300003f4:	4b20      	ldr	r3, [pc, #128]	(30000478 <.text.main+0xd0>)
+300003f6:	1c18      	mov	r0, r3		(add r0, r3, #0)
+300003f8:	ffc6f7ff 	bl	30000388 <delay>
+300003fc:	491d      	ldr	r1, [pc, #116]	(30000474 <.text.main+0xcc>)
+300003fe:	4b1d      	ldr	r3, [pc, #116]	(30000474 <.text.main+0xcc>)
+30000400:	681a      	ldr	r2, [r3, #0]
+30000402:	2310      	mov	r3, #16
+30000404:	4313      	orr	r3, r2
+30000406:	600b      	str	r3, [r1, #0]
+30000408:	491a      	ldr	r1, [pc, #104]	(30000474 <.text.main+0xcc>)
+3000040a:	4b1a      	ldr	r3, [pc, #104]	(30000474 <.text.main+0xcc>)
+3000040c:	681a      	ldr	r2, [r3, #0]
+3000040e:	2320      	mov	r3, #32
+30000410:	439a      	bic	r2, r3
+30000412:	1c13      	mov	r3, r2		(add r3, r2, #0)
+30000414:	600b      	str	r3, [r1, #0]
+30000416:	4917      	ldr	r1, [pc, #92]	(30000474 <.text.main+0xcc>)
+30000418:	4b16      	ldr	r3, [pc, #88]	(30000474 <.text.main+0xcc>)
+3000041a:	681a      	ldr	r2, [r3, #0]
+3000041c:	2340      	mov	r3, #64
+3000041e:	4313      	orr	r3, r2
+30000420:	600b      	str	r3, [r1, #0]
+30000422:	4b15      	ldr	r3, [pc, #84]	(30000478 <.text.main+0xd0>)
+30000424:	1c18      	mov	r0, r3		(add r0, r3, #0)
+30000426:	ffaff7ff 	bl	30000388 <delay>
+3000042a:	4912      	ldr	r1, [pc, #72]	(30000474 <.text.main+0xcc>)
+3000042c:	4b11      	ldr	r3, [pc, #68]	(30000474 <.text.main+0xcc>)
+3000042e:	681a      	ldr	r2, [r3, #0]
+30000430:	2310      	mov	r3, #16
+30000432:	4313      	orr	r3, r2
+30000434:	600b      	str	r3, [r1, #0]
+30000436:	490f      	ldr	r1, [pc, #60]	(30000474 <.text.main+0xcc>)
+30000438:	4b0e      	ldr	r3, [pc, #56]	(30000474 <.text.main+0xcc>)
+3000043a:	681a      	ldr	r2, [r3, #0]
+3000043c:	2320      	mov	r3, #32
+3000043e:	4313      	orr	r3, r2
+30000440:	600b      	str	r3, [r1, #0]
+30000442:	490c      	ldr	r1, [pc, #48]	(30000474 <.text.main+0xcc>)
+30000444:	4b0b      	ldr	r3, [pc, #44]	(30000474 <.text.main+0xcc>)
+30000446:	681a      	ldr	r2, [r3, #0]
+30000448:	2340      	mov	r3, #64
+3000044a:	439a      	bic	r2, r3
+3000044c:	1c13      	mov	r3, r2		(add r3, r2, #0)
+3000044e:	600b      	str	r3, [r1, #0]
+30000450:	4b09      	ldr	r3, [pc, #36]	(30000478 <.text.main+0xd0>)
+30000452:	1c18      	mov	r0, r3		(add r0, r3, #0)
+30000454:	ff98f7ff 	bl	30000388 <delay>
+30000458:	4a08      	ldr	r2, [pc, #32]	(3000047c <.text.main+0xd4>)
+3000045a:	7811      	ldrb	r1, [r2, #0]
+3000045c:	1c4b      	add	r3, r1, #1
+3000045e:	7013      	strb	r3, [r2, #0]
+30000460:	1c0b      	mov	r3, r1		(add r3, r1, #0)
+30000462:	061b      	lsl	r3, r3, #24
+30000464:	0e1b      	lsr	r3, r3, #24
+30000466:	1c18      	mov	r0, r3		(add r0, r3, #0)
+30000468:	fe9af7ff 	bl	300001a0 <S3C2440_Uart0_Putchar>
+3000046c:	e7af      	b	300003ce <main+0x26>
+3000046e:	0000      	lsl	r0, r0, #0
+30000470:	0498      	lsl	r0, r3, #18
+30000472:	3000      	add	r0, #0
+30000474:	0054      	lsl	r4, r2, #1
+30000476:	5600      	ldrsb	r0, [r0, r0]
+30000478:	ffff      	second half of BL instruction 0xffff
+3000047a:	0003      	lsl	r3, r0, #0
+3000047c:	0494      	lsl	r4, r2, #18
+3000047e:	3000      	add	r0, #0
+Disassembly of section .rodata:
+
+30000480 <.rodata>:
+30000480:	34325a4a 	ldrcct	r5, [r2], #-2634
+30000484:	54203034 	strplt	r3, [r0], #-52
+30000488:	20747365 	rsbcss	r7, r4, r5, ror #6
+3000048c:	21214b4f 	teqcs	r1, pc, asr #22
+30000490:	00000a0d 	andeq	r0, r0, sp, lsl #20
+Disassembly of section .data:
+
+30000494 <ch2>:
+30000494:	00000041 	andeq	r0, r0, r1, asr #32
+
+30000498 <str>:
+30000498:	30000480 	andcc	r0, r0, r0, lsl #9
