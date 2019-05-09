@@ -59,6 +59,9 @@
 		},
 		{
 			"path": "020th_lcd"
+		},
+		{
+			"path": "021th_lcd_extern"
 		}
 	],
 	"settings": {
@@ -105,7 +108,8 @@
 			"timer.h": "c",
 			"norflashdemo.h": "c",
 			"s3c2440_lcd_controller.h": "c",
-			"lcd_4.3.h": "c"
+			"lcd_4.3.h": "c",
+			"geometry.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
