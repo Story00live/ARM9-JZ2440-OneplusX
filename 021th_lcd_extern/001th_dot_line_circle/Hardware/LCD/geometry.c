@@ -20,7 +20,20 @@
 #include "s3c2440_lcd_controller.h"
 
 /**********************************************************************************************************
- @Function			void LCD_Geometry_Draw_Circle(int x, int y, int r, int color)
+ @Function			void LCD_Geometry_ClearScr(unsigned int color)
+ @Description			LCD_Geometry_ClearScr	: 清屏
+ @Input				color				: 颜色 32bit 0x00RRGGBB
+ @Return				void
+**********************************************************************************************************/
+void LCD_Geometry_ClearScr(unsigned int color)
+{
+	for (int x = 0; x < lcd_user_selected.xres; x++)
+		for (int y = 0; y < lcd_user_selected.yres; y++)
+			LCD_FrameBuffer_Pixel(x, y, color);
+}
+
+/**********************************************************************************************************
+ @Function			void LCD_Geometry_Draw_Circle(int x, int y, int r, unsigned int color)
  @Description			LCD_Geometry_Draw_Circle	: 画圆
  @Input				x					: 坐标x
 					y					: 坐标y
@@ -28,7 +41,7 @@
 					color				: 颜色 32bit 0x00RRGGBB
  @Return				void
 **********************************************************************************************************/
-void LCD_Geometry_Draw_Circle(int x, int y, int r, int color)
+void LCD_Geometry_Draw_Circle(int x, int y, int r, unsigned int color)
 {
 	int a, b, num;
 	a = 0;
@@ -55,7 +68,7 @@ void LCD_Geometry_Draw_Circle(int x, int y, int r, int color)
 }
 
 /**********************************************************************************************************
- @Function			void LCD_Geometry_Draw_Line(int x1, int y1, int x2, int y2, int color)
+ @Function			void LCD_Geometry_Draw_Line(int x1, int y1, int x2, int y2, unsigned int color)
  @Description			LCD_Geometry_Draw_Line	: 画线
  @Input				x1					: 坐标x1
 					y1					: 坐标y1
@@ -64,7 +77,7 @@ void LCD_Geometry_Draw_Circle(int x, int y, int r, int color)
 					color				: 颜色 32bit 0x00RRGGBB
  @Return				void
 **********************************************************************************************************/
-void LCD_Geometry_Draw_Line(int x1, int y1, int x2, int y2, int color)
+void LCD_Geometry_Draw_Line(int x1, int y1, int x2, int y2, unsigned int color)
 {
 	int dx, dy, e;
 	

@@ -155,6 +155,16 @@ void S3C2440_LCDTest(void)
 	
 	delay_simulate(0x0003FFFF);
 	
+	/* 清屏 */
+	LCD_Geometry_ClearScr(0xFF0000);
+	delay_simulate(0x0001FFFF);
+	LCD_Geometry_ClearScr(0x00FF00);
+	delay_simulate(0x0001FFFF);
+	LCD_Geometry_ClearScr(0x0000FF);
+	delay_simulate(0x0001FFFF);
+	LCD_Geometry_ClearScr(0x000000);
+	delay_simulate(0x0003FFFF);
+	
 	/* 画线 */
 	LCD_Geometry_Draw_Line(0, 0, lcd_user_selected.xres - 1, 0, 0x0023FF77);
 	LCD_Geometry_Draw_Line(lcd_user_selected.xres - 1, 0, lcd_user_selected.xres - 1, lcd_user_selected.yres - 1, 0x0000FFFF);
