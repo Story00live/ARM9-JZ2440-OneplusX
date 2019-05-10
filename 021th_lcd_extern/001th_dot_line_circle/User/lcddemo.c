@@ -178,18 +178,12 @@ void S3C2440_LCDTest(void)
 	/* 画圆 */
 	LCD_Geometry_Draw_Circle(lcd_user_selected.xres / 2, lcd_user_selected.yres / 2, lcd_user_selected.yres / 4, 0x000000FF);
 	
+	delay_simulate(0x0003FFFF);
 	
+	/* 清屏 */
+	LCD_Geometry_ClearScr(0x000000);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	LCD_Font_Print_string(lcd_user_selected.xres / 3, lcd_user_selected.yres / 2, "LCD Test Demo!! So what?", 0xFF0000);
 }
 
 /********************************************** END OF FLEE **********************************************/

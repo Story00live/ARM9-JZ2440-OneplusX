@@ -109,7 +109,8 @@
 			"norflashdemo.h": "c",
 			"s3c2440_lcd_controller.h": "c",
 			"lcd_4.3.h": "c",
-			"geometry.h": "c"
+			"geometry.h": "c",
+			"lcd_controller.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}

@@ -89,6 +89,7 @@ DOBJS             += Hardware/LCD/lcd_4.3.o
 DOBJS             += Hardware/LCD/lcd_controller.o
 DOBJS             += Hardware/LCD/lcd.o
 DOBJS             += Hardware/LCD/s3c2440_lcd_controller.o
+DOBJS             += Hardware/LCD/font_8x16.o
 
 LOBJS             += Libraries/Stdio/stdio.o
 LOBJS             += Libraries/String/string.o
