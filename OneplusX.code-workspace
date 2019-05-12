@@ -62,6 +62,9 @@
 		},
 		{
 			"path": "021th_lcd_extern"
+		},
+		{
+			"path": "022th_adc"
 		}
 	],
 	"settings": {
@@ -110,7 +113,9 @@
 			"s3c2440_lcd_controller.h": "c",
 			"lcd_4.3.h": "c",
 			"geometry.h": "c",
-			"lcd_controller.h": "c"
+			"lcd_controller.h": "c",
+			"adc.h": "c",
+			"init.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
