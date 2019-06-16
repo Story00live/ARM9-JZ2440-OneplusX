@@ -61,18 +61,20 @@ void S3C2440_EXTI_Init(void)
 }
 
 /**********************************************************************************************************
- @Function			int S3C2440_EXTI_Register(char* name, S3C2440_EXTI_IRQ_Function fp)
+ @Function			int S3C2440_EXTI_Register(char* name, unsigned char irq, S3C2440_EXTI_IRQ_Function fp)
  @Description			S3C2440_EXTI_Register		: 注册外部中断源
  @Input				name						: 外部中断名
+					irq						: 注册中断源
 					fd						: 外部中断执行函数
  @Return				0						: Success
 					-1						: Fail
 **********************************************************************************************************/
-int S3C2440_EXTI_Register(char* name, S3C2440_EXTI_IRQ_Function fp)
+int S3C2440_EXTI_Register(char* name, unsigned char irq, S3C2440_EXTI_IRQ_Function fp)
 {
 	for (int i = 0; i < EXTI_NUM; i++) {
 		if (!S3C2440_EXTI_IRQ_Func_Array[i].fp) {
 			S3C2440_EXTI_IRQ_Func_Array[i].name = name;
+			S3C2440_EXTI_IRQ_Func_Array[i].irq  = irq;
 			S3C2440_EXTI_IRQ_Func_Array[i].fp   = fp;
 			return 0;
 		}
@@ -93,6 +95,7 @@ int S3C2440_EXTI_Unregister(char* name)
 	for (int i = 0; i < EXTI_NUM; i++) {
 		if (!strcmp(S3C2440_EXTI_IRQ_Func_Array[i].name, name)) {
 			S3C2440_EXTI_IRQ_Func_Array[i].name = NULL;
+			S3C2440_EXTI_IRQ_Func_Array[i].irq  = 0;
 			S3C2440_EXTI_IRQ_Func_Array[i].fp   = NULL;
 			return 0;
 		}
@@ -110,45 +113,74 @@ int S3C2440_EXTI_Unregister(char* name)
 **********************************************************************************************************/
 void S3C2440_EXTI_Irq(unsigned int irqBit)
 {
+	for (int i = 0; i < EXTI_NUM; i++) {
+		if (S3C2440_EXTI_IRQ_Func_Array[i].fp && (S3C2440_EXTI_IRQ_Func_Array[i].irq == irqBit)) {
+			S3C2440_EXTI_IRQ_Func_Array[i].fp();
+		}
+	}
+}
+
+/**********************************************************************************************************
+ @Function			void S3C2440_EXTI_LED1_Irq_Demo(void)
+ @Description			S3C2440_EXTI_LED1_Irq_Demo
+ @Input				void
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_EXTI_LED1_Irq_Demo(void)
+{
 	unsigned int eintPendBit = EINTPEND;
 	
-	switch (irqBit)
-	{
-		case EINT0:													/* EINT0 */
-			if (S3C2440_KEYS2_READ()) {
-				/* S2松开 */
-				if (S3C2440_LED1_READ()) S3C2440_LED1_ON(); else S3C2440_LED1_OFF();
-			}
-			break;
+	if (S3C2440_KEYS2_READ()) {
+		/* S2松开 */
+		if (S3C2440_LED1_READ()) S3C2440_LED1_ON(); else S3C2440_LED1_OFF();
+	}
 	
-		case EINT2:													/* EINT2 */
-			if (S3C2440_KEYS3_READ()) {
-				/* S3松开 */
-				if (S3C2440_LED2_READ()) S3C2440_LED2_ON(); else S3C2440_LED2_OFF();
-			}
-			break;
+	EINTPEND = eintPendBit;
+}
+
+/**********************************************************************************************************
+ @Function			void S3C2440_EXTI_LED2_Irq_Demo(void)
+ @Description			S3C2440_EXTI_LED2_Irq_Demo
+ @Input				void
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_EXTI_LED2_Irq_Demo(void)
+{
+	unsigned int eintPendBit = EINTPEND;
 	
-		case EINT8_23:													/* EINT8_23 */
-			if (eintPendBit & (1<<11)) {
-				/* EINT11 */
-				if (S3C2440_KEYS4_READ()) {
-					/* S4松开 */
-					if (S3C2440_LED3_READ()) S3C2440_LED3_ON(); else S3C2440_LED3_OFF();
-				}
-			}
-			if (eintPendBit & (1<<19)) {
-				/* EINT19 */
-				if (S3C2440_KEYS5_READ()) {
-					/* S5松开 */
-					if (S3C2440_LED1_READ()) S3C2440_LED1_ON(); else S3C2440_LED1_OFF();
-					if (S3C2440_LED2_READ()) S3C2440_LED2_ON(); else S3C2440_LED2_OFF();
-					if (S3C2440_LED3_READ()) S3C2440_LED3_ON(); else S3C2440_LED3_OFF();
-				}
-			}
-			break;
+	if (S3C2440_KEYS3_READ()) {
+		/* S3松开 */
+		if (S3C2440_LED2_READ()) S3C2440_LED2_ON(); else S3C2440_LED2_OFF();
+	}
 	
-		default:
-			break;
+	EINTPEND = eintPendBit;
+}
+
+/**********************************************************************************************************
+ @Function			void S3C2440_EXTI_LED3_Irq_Demo(void)
+ @Description			S3C2440_EXTI_LED3_Irq_Demo
+ @Input				void
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_EXTI_LED3_Irq_Demo(void)
+{
+	unsigned int eintPendBit = EINTPEND;
+	
+	if (eintPendBit & (1<<11)) {
+		/* EINT11 */
+		if (S3C2440_KEYS4_READ()) {
+			/* S4松开 */
+			if (S3C2440_LED3_READ()) S3C2440_LED3_ON(); else S3C2440_LED3_OFF();
+		}
+	}
+	if (eintPendBit & (1<<19)) {
+		/* EINT19 */
+		if (S3C2440_KEYS5_READ()) {
+			/* S5松开 */
+			if (S3C2440_LED1_READ()) S3C2440_LED1_ON(); else S3C2440_LED1_OFF();
+			if (S3C2440_LED2_READ()) S3C2440_LED2_ON(); else S3C2440_LED2_OFF();
+			if (S3C2440_LED3_READ()) S3C2440_LED3_ON(); else S3C2440_LED3_OFF();
+		}
 	}
 	
 	EINTPEND = eintPendBit;

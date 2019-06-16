@@ -157,8 +157,11 @@ int main(int argc, char const *argv[])
 #if 1
 	/* -初始化外部中断- */
 	S3C2440_EXTI_Init();
+	
 	/* -初始化Timer0定时器- */
 	S3C2440_TIMER0_Init();
+	/* -初始化Timer1定时器- */
+	S3C2440_TIMER1_Init();
 #endif
 	
 	standard_putchar_callback(S3C2440_Uart0_Putchar);
@@ -167,9 +170,17 @@ int main(int argc, char const *argv[])
 	string_getchar_callback(S3C2440_Uart0_Getchar);
 	
 #if 1
+	/* -注册EINT0中断执行函数- */
+	S3C2440_EXTI_Register("EINT0", EINT0, S3C2440_EXTI_LED1_Irq_Demo);
+	/* -注册EINT2中断执行函数- */
+	S3C2440_EXTI_Register("EINT2", EINT2, S3C2440_EXTI_LED2_Irq_Demo);
+	/* -注册EINT8_23中断执行函数- */
+	S3C2440_EXTI_Register("EINT8_23", EINT8_23, S3C2440_EXTI_LED3_Irq_Demo);
 	
-	/* 注册Timer0中断执行函数 */
-	S3C2440_TIMER0_Register("LED", S3C2440_TIMER0_LED_Irq_Demo);
+	/* -注册Timer0中断执行函数- */
+	S3C2440_TIMER_Register("LED0", INT_TIMER0, S3C2440_TIMER0_LED_Irq_Demo);
+	/* -注册Timer1中断执行函数- */
+	S3C2440_TIMER_Register("LED1", INT_TIMER1, S3C2440_TIMER1_LED_Irq_Demo);
 #endif
 	
 #if 0
