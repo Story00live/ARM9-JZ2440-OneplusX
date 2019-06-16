@@ -120,7 +120,8 @@
 			"adc.h": "c",
 			"init.h": "c",
 			"touchscreen.h": "c",
-			"key.h": "c"
+			"key.h": "c",
+			"touchscreenlib.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}

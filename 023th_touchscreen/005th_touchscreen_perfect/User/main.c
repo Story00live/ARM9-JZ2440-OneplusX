@@ -24,6 +24,7 @@
 #include "timer.h"
 #include "adc.h"
 #include "touchscreen.h"
+#include "touchscreenlib.h"
 #include "norflash.h"
 #include "nandflash.h"
 #include "sdram.h"
@@ -31,6 +32,7 @@
 #include "norflashdemo.h"
 #include "nandflashdemo.h"
 #include "lcddemo.h"
+#include "touchscreendemo.h"
 
 #if 0
 /**********************************************************************************************************
@@ -238,7 +240,7 @@ int main(int argc, char const *argv[])
 #if 0
 	S3C2440_AdcInitialized();
 #endif
-#if 1
+#if 0
 	S3C2440_TouchScreen_Init();
 #endif
 	

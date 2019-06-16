@@ -4,6 +4,7 @@
 #include "s3c2440_soc.h"
 
 void S3C2440_TouchScreen_Init(void);
+
 void S3C2440_TouchScreen_ADC_Irq(unsigned int irq);
 void S3C2440_TouchScreen_Timer_Irq(void);
 

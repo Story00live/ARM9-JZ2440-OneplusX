@@ -92,6 +92,7 @@ DOBJS             += Hardware/LCD/s3c2440_lcd_controller.o
 DOBJS             += Hardware/LCD/font_8x16.o
 DOBJS             += Hardware/ADC/adc.o
 DOBJS             += Hardware/TOUCH/touchscreen.o
+DOBJS             += Hardware/TOUCH/touchscreenlib.o
 
 LOBJS             += Libraries/Stdio/stdio.o
 LOBJS             += Libraries/String/string.o
@@ -100,6 +101,7 @@ LOBJS             += Libraries/Standard/standard.o
 AOBJS             += User/nandflashdemo.o
 AOBJS             += User/norflashdemo.o
 AOBJS             += User/lcddemo.o
+AOBJS             += User/touchscreendemo.o
 AOBJS             += User/main.o
 
 OBJS              := $(SOBJS) $(COBJS) $(DOBJS) $(LOBJS) $(AOBJS)
