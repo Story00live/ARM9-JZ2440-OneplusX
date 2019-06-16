@@ -23,6 +23,7 @@
 #include "exti.h"
 #include "timer.h"
 #include "adc.h"
+#include "touchscreen.h"
 #include "norflash.h"
 #include "nandflash.h"
 #include "sdram.h"
@@ -139,7 +140,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 ADC Test : ADC OK!!\r\n";
+char* str = "JZ2440 Touch Screen Test : Improve Timer OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -152,11 +153,10 @@ int main(int argc, char const *argv[])
 	S3C2440_LedInitialized();
 	S3C2440_KeyInitialized();
 	S3C2440_Uart0Initialized();
-	S3C2440_AdcInitialized();
 	
-#if 0
-	/* -初始化外部中断- */
-	S3C2440_EXTI_Init();
+#if 1
+//	/* -初始化外部中断- */
+//	S3C2440_EXTI_Init();
 	/* -初始化Timer0定时器- */
 	S3C2440_TIMER0_Init();
 #endif
@@ -165,6 +165,12 @@ int main(int argc, char const *argv[])
 	
 	string_putchar_callback(S3C2440_Uart0_Putchar);
 	string_getchar_callback(S3C2440_Uart0_Getchar);
+	
+#if 1
+	
+	/* 注册Timer0中断执行函数 */
+	S3C2440_TIMER0_Register("LED", S3C2440_TIMER0_LED_Irq_Demo);
+#endif
 	
 #if 0
 	S3C2440_Uart0_Puts(str);
@@ -216,9 +222,16 @@ int main(int argc, char const *argv[])
 	S3C2440_LCDTest();
 #endif
 	
+#if 0
+	S3C2440_AdcInitialized();
+#endif
+#if 1
+	S3C2440_TouchScreen_Init();
+#endif
+	
 	while (true) {
 		
-#if 1
+#if 0
 		int    val;
 		double vol;
 		val = S3C2440_AdcRead_AIN0();
@@ -258,7 +271,7 @@ int main(int argc, char const *argv[])
 		}
 #endif
 		
-#if 1
+#if 0
 		S3C2440_LED1_ON();
 		S3C2440_LED2_OFF();
 		S3C2440_LED3_OFF();
@@ -272,9 +285,9 @@ int main(int argc, char const *argv[])
 		S3C2440_LED3_ON();
 		delay_simulate(0x0003FFFF);
 #else
-		delay(0x0003FFFF);
-		delay(0x0003FFFF);
-		delay(0x0003FFFF);
+		delay_simulate(0x0003FFFF);
+		delay_simulate(0x0003FFFF);
+		delay_simulate(0x0003FFFF);
 #endif
 		
 #if 0

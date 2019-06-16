@@ -23,6 +23,7 @@
 #include "exti.h"
 #include "timer.h"
 #include "adc.h"
+#include "touchscreen.h"
 #include "norflash.h"
 #include "nandflash.h"
 #include "sdram.h"
@@ -139,7 +140,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 ADC Test : ADC OK!!\r\n";
+char* str = "JZ2440 Touch Screen Test : Touch Screen OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -152,7 +153,13 @@ int main(int argc, char const *argv[])
 	S3C2440_LedInitialized();
 	S3C2440_KeyInitialized();
 	S3C2440_Uart0Initialized();
+	
+#if 0
 	S3C2440_AdcInitialized();
+#endif
+#if 1
+	S3C2440_TouchScreen_Init();
+#endif
 	
 #if 0
 	/* -初始化外部中断- */
@@ -218,7 +225,7 @@ int main(int argc, char const *argv[])
 	
 	while (true) {
 		
-#if 1
+#if 0
 		int    val;
 		double vol;
 		val = S3C2440_AdcRead_AIN0();

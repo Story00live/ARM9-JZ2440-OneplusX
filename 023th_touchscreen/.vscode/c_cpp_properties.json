@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+			 "${workspaceFolder}/**",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/ADC",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/EXTI",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/KEY",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/LCD",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/LED",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/NANDFLASH",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/NORFLASH",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/SDRAM",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/TIMER",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/TOUCH",
+			 "${workspaceFolder}/003th_improve_exti/Hardware/UART",
+			 "${workspaceFolder}/003th_improve_exti/Libraries/Standard",
+			 "${workspaceFolder}/003th_improve_exti/Libraries/Stdio",
+			 "${workspaceFolder}/003th_improve_exti/Libraries/String",
+			 "${workspaceFolder}/003th_improve_exti/System/Init",
+			 "${workspaceFolder}/003th_improve_exti/System/Interrupt",
+			 "${workspaceFolder}/003th_improve_exti/User"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "G:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gcc.exe",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

@@ -65,6 +65,9 @@
 		},
 		{
 			"path": "022th_adc"
+		},
+		{
+			"path": "023th_touchscreen"
 		}
 	],
 	"settings": {
@@ -115,7 +118,9 @@
 			"geometry.h": "c",
 			"lcd_controller.h": "c",
 			"adc.h": "c",
-			"init.h": "c"
+			"init.h": "c",
+			"touchscreen.h": "c",
+			"key.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
