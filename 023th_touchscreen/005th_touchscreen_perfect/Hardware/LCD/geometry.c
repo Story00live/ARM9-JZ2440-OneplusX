@@ -27,8 +27,8 @@
 **********************************************************************************************************/
 void LCD_Geometry_ClearScr(unsigned int color)
 {
-	for (int x = 0; x < lcd_user_selected.xres; x++)
-		for (int y = 0; y < lcd_user_selected.yres; y++)
+	for (int y = 0; y < lcd_user_selected.yres; y++)
+		for (int x = 0; x < lcd_user_selected.xres; x++)
 			LCD_FrameBuffer_Pixel(x, y, color);
 }
 

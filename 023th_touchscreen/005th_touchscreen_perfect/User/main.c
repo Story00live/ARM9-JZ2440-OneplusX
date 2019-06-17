@@ -244,6 +244,10 @@ int main(int argc, char const *argv[])
 	S3C2440_TouchScreen_Init();
 #endif
 	
+#if 1
+	S3C2440_TouchScreenTest();
+#endif
+	
 	while (true) {
 		
 #if 0

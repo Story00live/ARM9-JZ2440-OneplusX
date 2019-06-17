@@ -36,10 +36,10 @@
 #include "key.h"
 #include "uart.h"
 
-#define DEBUG
+//#define DEBUG
 
 #ifndef DEBUG
-#define Debug_Printf(expr)		((void)0U)
+#define Debug_Printf			printfnull
 #else
 #define Debug_Printf			printfln
 #endif
@@ -55,6 +55,16 @@ static int TouchScreenLcdXc, TouchScreenLcdYc;
 
 static int TouchScreenXYSwap = TSHOLDRSE;
 
+static int TouchScreenLib_GetLcdXFrm_TS_X(int tsX)
+{
+	return TouchScreenKx * (tsX - TouchScreenXc) + TouchScreenLcdXc;
+}
+
+static int TouchScreenLib_GetLcdYFrm_TS_Y(int tsY)
+{
+	return TouchScreenKy * (tsY - TouchScreenYc) + TouchScreenLcdYc;
+}
+
 /**********************************************************************************************************
  @Function			static void TouchScreenLib_GetCalibratePointData(int lcd_x, int lcd_y, int* px, int* py)
  @Description			TouchScreenLib_GetCalibratePointData
@@ -67,6 +77,7 @@ static int TouchScreenXYSwap = TSHOLDRSE;
 static void TouchScreenLib_GetCalibratePointData(int lcd_x, int lcd_y, int* px, int* py)
 {
 	int touchScreenX, touchScreenY, touchScreenPressure;
+	int touchScreenSumX = 0, touchScreenSumY = 0, touchScreenCnt = 0;
 	
 	/* -LCD画十字- */
 	LCD_Geometry_Draw_Cross(lcd_x, lcd_y, 10, 0xFFFFFF);
@@ -76,11 +87,25 @@ static void TouchScreenLib_GetCalibratePointData(int lcd_x, int lcd_y, int* px, 
 		TouchScreen_ReadRaw_TouchScreen_XY(&touchScreenX, &touchScreenY, &touchScreenPressure);
 	} while (touchScreenPressure == 0);
 	
+	do {
+		if (touchScreenCnt < 128) {
+			touchScreenSumX += touchScreenX;
+			touchScreenSumY += touchScreenY;
+			touchScreenCnt++;
+		}
+		TouchScreen_ReadRaw_TouchScreen_XY(&touchScreenX, &touchScreenY, &touchScreenPressure);
+		
+		Debug_Printf("[TouchScreen Lib: Raw Data X = %08d, Y = %08d, Cnt = %d.]", touchScreenX, touchScreenY, touchScreenCnt);
+		
+	} while (touchScreenPressure);
 	
+	*px = touchScreenSumX / touchScreenCnt;
+	*py = touchScreenSumY / touchScreenCnt;
 	
+	Debug_Printf("[TouchScreen Lib: Return Raw Data X = %08d, Y = %08d.]", *px, *py);
 	
-	
-	
+	/* -LCD清除十字- */
+	LCD_Geometry_Draw_Cross(lcd_x, lcd_y, 10, 0x000000);
 }
 
 /**********************************************************************************************************
@@ -191,9 +216,11 @@ void TouchScreenLib_Calibrate(void)
 	TouchScreenLcdXc = lcd_user_selected.xres / 2;
 	TouchScreenLcdYc = lcd_user_selected.yres / 2;
 	
-	
-	
-	
+	Debug_Printf("[TouchScreen Lib: A LCD-X = %08d, LCD-Y = %08d.]", TouchScreenLib_GetLcdXFrm_TS_X(AtouchScreenX), TouchScreenLib_GetLcdYFrm_TS_Y(AtouchScreenY));
+	Debug_Printf("[TouchScreen Lib: B LCD-X = %08d, LCD-Y = %08d.]", TouchScreenLib_GetLcdXFrm_TS_X(BtouchScreenX), TouchScreenLib_GetLcdYFrm_TS_Y(BtouchScreenY));
+	Debug_Printf("[TouchScreen Lib: C LCD-X = %08d, LCD-Y = %08d.]", TouchScreenLib_GetLcdXFrm_TS_X(CtouchScreenX), TouchScreenLib_GetLcdYFrm_TS_Y(CtouchScreenY));
+	Debug_Printf("[TouchScreen Lib: D LCD-X = %08d, LCD-Y = %08d.]", TouchScreenLib_GetLcdXFrm_TS_X(DtouchScreenX), TouchScreenLib_GetLcdYFrm_TS_Y(DtouchScreenY));
+	Debug_Printf("[TouchScreen Lib: E LCD-X = %08d, LCD-Y = %08d.]", TouchScreenLib_GetLcdXFrm_TS_X(EtouchScreenX), TouchScreenLib_GetLcdYFrm_TS_Y(EtouchScreenY));
 }
 
 /**********************************************************************************************************

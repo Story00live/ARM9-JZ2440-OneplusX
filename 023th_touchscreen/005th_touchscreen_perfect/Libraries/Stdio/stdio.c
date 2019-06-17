@@ -874,6 +874,17 @@ int printfln_(const char* format, ...)
 }
 
 /**********************************************************************************************************
+ @Function			int printfnull_(const char* format, ...)
+ @Description			printfnull_
+ @Input				
+ @Return				
+**********************************************************************************************************/
+int printfnull_(const char* format, ...)
+{
+	return 0;
+}
+
+/**********************************************************************************************************
  @Function			int sprintf_(char* buffer, const char* format, ...)
  @Description			sprintf_
  @Input				

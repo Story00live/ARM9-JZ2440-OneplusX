@@ -18,12 +18,14 @@ int     printf_(const char* format, ...);
 #define printfln	printfln_
 int     printfln_(const char* format, ...);
 
+#define printfnull
+int     printfnull_(const char* format, ...);
+
 #define sprintf	sprintf_
 int     sprintf_(char* buffer, const char* format, ...);
 
 #define snprintf	snprintf_
 int     snprintf_(char* buffer, size_t count, const char* format, ...);
-
 
 
 

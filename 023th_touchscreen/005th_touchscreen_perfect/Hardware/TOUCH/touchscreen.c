@@ -16,10 +16,10 @@
 #include "interrupt.h"
 #include "timer.h"
 
-#define DEBUG
+//#define DEBUG
 
 #ifndef DEBUG
-#define Debug_Printf(expr)		((void)0U)
+#define Debug_Printf			printfnull
 #else
 #define Debug_Printf			printfln
 #endif
@@ -226,6 +226,10 @@ static void S3C2440_TouchScreen_ADC_Isr_Adc(void)
 	int x = ADCDAT0;
 	int y = ADCDAT1;
 	
+	static int touchScreenAdcCnt = 0;
+	static int touchScreenAdcX   = 0;
+	static int touchScreenAdcY   = 0;
+	
 	/* -进入ADC中断时, TS处于"自动测量模式"- 
 	 * -只有在"等待中断模式"下才可使用ADCDATA0'BIT15来判断触摸屏状态-
 	 */
@@ -233,6 +237,7 @@ static void S3C2440_TouchScreen_ADC_Isr_Adc(void)
 	
 	if (!(ADCDAT0 & (1<<15))) {
 		/* -按下- */
+#if 0
 		x &= 0x03FF;
 		y &= 0x03FF;
 		
@@ -240,9 +245,44 @@ static void S3C2440_TouchScreen_ADC_Isr_Adc(void)
 		
 		/* -启动定时器以再次读取数据- */
 		TouchScreen_Timer_Enable();
+#endif
+		touchScreenAdcX += (x & 0x03FF);
+		touchScreenAdcY += (y & 0x03FF);
+		
+		touchScreenAdcCnt++;
+		
+		if (touchScreenAdcCnt >= 16) {
+			touchScreenAdcX >>= 4;
+			touchScreenAdcY >>= 4;
+			
+			/* 写入数据 */
+			TouchScreen_Report_TouchScreen_XY(touchScreenAdcX, touchScreenAdcY, 1);
+			
+			touchScreenAdcCnt = 0;
+			touchScreenAdcX   = 0;
+			touchScreenAdcY   = 0;
+			
+			/* -进入"等待触摸屏松开"模式- */
+			TouchScreen_Enter_Wait_Pen_Up_Mode();
+			/* -启动定时器以再次读取数据- */
+			TouchScreen_Timer_Enable();
+		}
+		else {
+			/* -进入"自动测量"模式- */
+			TouchScreen_Enter_Auto_Measure_Mode();
+			/* -启动ADC- */
+			ADCCON |= (1<<0);
+		}
 	}
 	else {
 		/* -松开- */
+		touchScreenAdcCnt = 0;
+		touchScreenAdcX   = 0;
+		touchScreenAdcY   = 0;
+		
+		/* 写入数据 */
+		TouchScreen_Report_TouchScreen_XY(0, 0, 0);
+		
 		/* -关闭定时器不在读取数据- */
 		TouchScreen_Timer_Disable();
 		
