@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+			 "${workspaceFolder}/**",
+			 "${workspaceFolder}/Hardware/ADC",
+			 "${workspaceFolder}/Hardware/AT24CXX",
+			 "${workspaceFolder}/Hardware/EXTI",
+			 "${workspaceFolder}/Hardware/IIC",
+			 "${workspaceFolder}/Hardware/KEY",
+			 "${workspaceFolder}/Hardware/LCD",
+			 "${workspaceFolder}/Hardware/LED",
+			 "${workspaceFolder}/Hardware/NANDFLASH",
+			 "${workspaceFolder}/Hardware/NORFLASH",
+			 "${workspaceFolder}/Hardware/SDRAM",
+			 "${workspaceFolder}/Hardware/TIMER",
+			 "${workspaceFolder}/Hardware/TOUCH",
+			 "${workspaceFolder}/Hardware/UART",
+			 "${workspaceFolder}/Libraries/Standard",
+			 "${workspaceFolder}/Libraries/Stdio",
+			 "${workspaceFolder}/Libraries/String",
+			 "${workspaceFolder}/System/Init",
+			 "${workspaceFolder}/System/Interrupt",
+			 "${workspaceFolder}/User"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "G:\\mingw-w64\\x86_64-7.2.0-posix-seh-rt_v5-rev1\\mingw64\\bin\\gcc.exe",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

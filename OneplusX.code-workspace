@@ -71,6 +71,9 @@
 		},
 		{
 			"path": "024th_iic_eeprom"
+		},
+		{
+			"path": "JZ2440_s3c2440_bare_board_app"
 		}
 	],
 	"settings": {
