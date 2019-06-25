@@ -68,6 +68,9 @@
 		},
 		{
 			"path": "023th_touchscreen"
+		},
+		{
+			"path": "024th_iic_eeprom"
 		}
 	],
 	"settings": {
@@ -121,7 +124,10 @@
 			"init.h": "c",
 			"touchscreen.h": "c",
 			"key.h": "c",
-			"touchscreenlib.h": "c"
+			"touchscreenlib.h": "c",
+			"i2c_controller.h": "c",
+			"s3c2440_i2c_controller.h": "c",
+			"at24cxx.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
