@@ -144,7 +144,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Touch Screen Test : Bare Board APP OK!!";
+char* str = "JZ2440 Bare Board APP Test : OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -193,7 +193,7 @@ int __init main(int argc, char const *argv[])
 	
 #if 1
 	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 1, 0);
-     printfln("Copyright (C) 2019 Design by Kangkang");
+     printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
 	printf("%c\r\n", ch3 + 0x30);
@@ -246,11 +246,11 @@ int __init main(int argc, char const *argv[])
 	S3C2440_TouchScreen_Init();
 #endif
 	
-#if 1
+#if 0
 	S3C2440_TouchScreenTest();
 #endif
 	
-#if 0
+#if 1
 	I2C_Init();
 #endif
 	
@@ -264,7 +264,7 @@ int __init main(int argc, char const *argv[])
 		printf("vol: %fv\r", vol);
 #endif
 		
-#if 0
+#if 1
 		/* -打印菜单,　选择测试内容- */
 		printf("[a] Test Nor  Flash.\r\n");
 		printf("[b] Test Nand Flash.\r\n");

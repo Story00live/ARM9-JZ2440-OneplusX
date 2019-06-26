@@ -224,7 +224,7 @@ void S3C2440_I2C_Irq(unsigned int irqBit)
 				/* -Clear Interrupt Pending Flag- */
 				IICCON &= ~(1<<4);
 				/* -Wait until the stop condition takes effect- */
-				delay_simulate(1000);
+				delay_simulate(S3C2440_I2C_CTRL_DELAY);
 				return;
 			}
 		}
@@ -242,7 +242,7 @@ void S3C2440_I2C_Irq(unsigned int irqBit)
 			/* -Clear Interrupt Pending Flag- */
 			IICCON &= ~(1<<4);
 			/* -Wait until the stop condition takes effect- */
-			delay_simulate(1000);
+			delay_simulate(S3C2440_I2C_CTRL_DELAY);
 		}
 	}
 	
@@ -262,7 +262,7 @@ void S3C2440_I2C_Irq(unsigned int irqBit)
 				/* -Clear Interrupt Pending Flag- */
 				IICCON &= ~(1<<4);
 				/* -Wait until the stop condition takes effect- */
-				delay_simulate(1000);
+				delay_simulate(S3C2440_I2C_CTRL_DELAY);
 				return;
 			}
 			else {
@@ -295,7 +295,7 @@ void S3C2440_I2C_Irq(unsigned int irqBit)
 			/* -Clear Interrupt Pending Flag- */
 			IICCON &= ~(1<<4);
 			/* -Wait until the stop condition takes effect- */
-			delay_simulate(1000);
+			delay_simulate(S3C2440_I2C_CTRL_DELAY);
 		}
 	}
 }
