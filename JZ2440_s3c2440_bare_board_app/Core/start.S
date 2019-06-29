@@ -91,6 +91,9 @@ reset:
 		
 		/* -一旦设置PLL,就会锁定lock time直到PLL输出稳定,然后CPU工作于新的频率FCLK- */
 		
+		/* -使能ICache 指令缓存- */
+		bl		S3C2440_ICache_Enable
+		
 		/* -设置内存: 栈SP- 
 		 * -分辨是nor/nand启动-
 		 * -写0到0地址, 再读出来-
@@ -114,6 +117,12 @@ reset:
 		
 		/* -调用S3C2440_Initialized_SDRAM函数, 初始化SDRAM- */
 		bl		S3C2440_Initialized_SDRAM
+		
+		/* -创建页表- */
+		bl		S3C2440_MMU_CreatPageTable
+		
+		/* -启动MMU- */
+		bl		S3C2440_MMU_Enable
 		
 		/* -重定位text, rodata, data段- */
 		bl		S3C2440_Initialized_CopyCodeData
@@ -156,6 +165,49 @@ sdramCode:
 halt:
 		/* -死循环- */
 		b		halt
+		
+/**
+  *********************************************************************************************************
+  * @Author             : kang.yunjie
+  * @version            : V1.0
+  * @Date               : 2019-06-29 16:00:00
+  * @attention          : Enable ICache
+  *********************************************************************************************************
+  */
+		.align	4
+S3C2440_ICache_Enable:
+		/* -设置协处理器, 使能ICache- */
+		mrc		p15,		0,	r0,	c1,	c0,	0
+		orr		r0,		r0,	#(1<<12)
+		mcr		p15,		0,	r0,	c1,	c0,	0
+		mov		pc,		lr
+		
+/**
+  *********************************************************************************************************
+  * @Author             : kang.yunjie
+  * @version            : V1.0
+  * @Date               : 2019-06-29 21:00:00
+  * @attention          : Enable MMU
+  *********************************************************************************************************
+  */
+		.align	4
+S3C2440_MMU_Enable:
+		/* -把页表基地址告诉CP15- */
+		ldr		r0,		=0x32000000
+		mcr		p15,		0,	r0,	c2,	c0,	0
+		
+		/* -设置域为0xFFFFFFFF, 不进行权限检查- */
+		ldr		r0,		=0xFFFFFFFF
+		mcr		p15,		0,	r0,	c3,	c0,	0
+		
+		/* -使能ICache DCache MMU- */
+		mrc		p15,		0,	r0,	c1,	c0,	0
+		orr		r0,		r0,	#(1<<12)									/* Enable ICache */
+		orr		r0,		r0,	#(1<< 2)									/* Enable DCache */
+		orr		r0,		r0,	#(1<< 0)									/* Enable MMU */
+		mcr		p15,		0,	r0,	c1,	c0,	0
+		
+		mov		pc,		lr
 		
 /**
   *********************************************************************************************************

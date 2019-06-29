@@ -11,6 +11,7 @@
 			 "${workspaceFolder}/Hardware/KEY",
 			 "${workspaceFolder}/Hardware/LCD",
 			 "${workspaceFolder}/Hardware/LED",
+			 "${workspaceFolder}/Hardware/MMU",
 			 "${workspaceFolder}/Hardware/NANDFLASH",
 			 "${workspaceFolder}/Hardware/NORFLASH",
 			 "${workspaceFolder}/Hardware/SDRAM",

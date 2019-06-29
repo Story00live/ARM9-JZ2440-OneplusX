@@ -75,6 +75,7 @@ COBJS             += System/Init/init.o
 COBJS             += System/Interrupt/interrupt.o
 
 DOBJS             += Hardware/SDRAM/sdram.o
+DOBJS             += Hardware/MMU/mmu.o
 DOBJS             += Hardware/NANDFLASH/nandflash.o
 DOBJS             += Hardware/NORFLASH/norflash.o
 DOBJS             += Hardware/LED/led.o
@@ -121,6 +122,7 @@ INCLUDE           += -I./Core
 INCLUDE           += -I./System/Init
 INCLUDE           += -I./System/Interrupt
 INCLUDE           += -I./Hardware/SDRAM
+INCLUDE           += -I./Hardware/MMU
 INCLUDE           += -I./Hardware/NANDFLASH
 INCLUDE           += -I./Hardware/NORFLASH
 INCLUDE           += -I./Hardware/LED
