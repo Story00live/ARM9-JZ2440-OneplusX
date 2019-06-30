@@ -130,7 +130,9 @@
 			"touchscreenlib.h": "c",
 			"i2c_controller.h": "c",
 			"s3c2440_i2c_controller.h": "c",
-			"at24cxx.h": "c"
+			"at24cxx.h": "c",
+			"spi_gpio.h": "c",
+			"oled.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
