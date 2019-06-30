@@ -100,6 +100,7 @@ DOBJS             += Hardware/IIC/i2c.o
 DOBJS             += Hardware/AT24CXX/at24cxx.o
 DOBJS             += Hardware/SPI/spi_gpio.o
 DOBJS             += Hardware/OLED/oled.o
+DOBJS             += Hardware/W25QXX/w25qxx.o
 
 LOBJS             += Libraries/Stdio/stdio.o
 LOBJS             += Libraries/String/string.o
@@ -139,6 +140,7 @@ INCLUDE           += -I./Hardware/IIC
 INCLUDE           += -I./Hardware/AT24CXX
 INCLUDE           += -I./Hardware/SPI
 INCLUDE           += -I./Hardware/OLED
+INCLUDE           += -I./Hardware/W25QXX
 INCLUDE           += -I./Libraries/Stdio
 INCLUDE           += -I./Libraries/String
 INCLUDE           += -I./Libraries/Standard

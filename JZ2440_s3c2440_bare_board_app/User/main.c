@@ -27,6 +27,7 @@
 #include "touchscreenlib.h"
 #include "i2c.h"
 #include "oled.h"
+#include "w25qxx.h"
 #include "norflash.h"
 #include "nandflash.h"
 #include "sdram.h"
@@ -146,7 +147,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Bare Board APP Test : GPIO SPI OLED OK!!\r\n";
+char* str = "JZ2440 Bare Board APP Test : GPIO SPI W25QXX OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -160,6 +161,7 @@ int __init main(int argc, char const *argv[])
 	S3C2440_KeyInitialized();
 	S3C2440_Uart0Initialized();
 	S3C2440_OLEDInitialized();
+	S3C2440_W25QxxInitialized();
 	
 #if 1
 	/* -初始化外部中断- */
@@ -195,7 +197,7 @@ int __init main(int argc, char const *argv[])
 #endif
 	
 #if 1
-	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 3, 4);
+	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 4, 1);
      printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
@@ -257,11 +259,23 @@ int __init main(int argc, char const *argv[])
 	I2C_Init();
 #endif
 	
-#if 1
-	S3C2440_OLEDPrint(0, 0, "JZ2440 Board V1");
-	S3C2440_OLEDPrint(2, 0, "JZ2440 Board V0");
-	S3C2440_OLEDPrint(4, 0, "JZ2440 Board V0");
-	S3C2440_OLEDPrint(6, 0, "JZ2440 Board V2");
+#if 0
+	int ManufacturerID = 0, DeviceID = 0;
+	char OLEDStr[16];
+	char W25QStr[16];
+	S3C2440_W25QxxReadID(&ManufacturerID, &DeviceID);
+	printfln("W25QXX ManufacturerID : 0x%X, DeviceID : 0x%X\r\n", ManufacturerID, DeviceID);
+	sprintf(OLEDStr, "MID: %X DID: %X", ManufacturerID, DeviceID);
+	S3C2440_W25QxxEraseSector(4096);
+	S3C2440_W25QxxProgram(4096, (unsigned char*)"W25QXX Demo!", 13);
+	S3C2440_W25QxxRead(4096, (unsigned char*)W25QStr, 13);
+#endif
+	
+#if 0
+	S3C2440_OLEDPrint(0, 0, "JZ2440 Board V20");
+	S3C2440_OLEDPrint(2, 0, "SPI FLASH");
+	S3C2440_OLEDPrint(4, 0, W25QStr);
+	S3C2440_OLEDPrint(6, 0, OLEDStr);
 #endif
 	
 	while (true) {

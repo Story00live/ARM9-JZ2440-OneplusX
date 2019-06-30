@@ -20,6 +20,7 @@
 			 "${workspaceFolder}/Hardware/TIMER",
 			 "${workspaceFolder}/Hardware/TOUCH",
 			 "${workspaceFolder}/Hardware/UART",
+			 "${workspaceFolder}/Hardware/W25QXX",
 			 "${workspaceFolder}/Libraries/Standard",
 			 "${workspaceFolder}/Libraries/Stdio",
 			 "${workspaceFolder}/Libraries/String",
