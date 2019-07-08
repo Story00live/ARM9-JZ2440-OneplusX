@@ -99,6 +99,7 @@ DOBJS             += Hardware/IIC/s3c2440_i2c_controller.o
 DOBJS             += Hardware/IIC/i2c.o
 DOBJS             += Hardware/AT24CXX/at24cxx.o
 DOBJS             += Hardware/SPI/spi_gpio.o
+DOBJS             += Hardware/SPI/spi_s3c2440.o
 DOBJS             += Hardware/OLED/oled.o
 DOBJS             += Hardware/W25QXX/w25qxx.o
 

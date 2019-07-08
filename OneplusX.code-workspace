@@ -132,7 +132,9 @@
 			"s3c2440_i2c_controller.h": "c",
 			"at24cxx.h": "c",
 			"spi_gpio.h": "c",
-			"oled.h": "c"
+			"oled.h": "c",
+			"oledfont.h": "c",
+			"w25qxx.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
