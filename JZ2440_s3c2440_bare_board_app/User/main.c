@@ -147,7 +147,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Bare Board APP Test : GPIO SPI W25QXX OK!!\r\n";
+char* str = "JZ2440 Bare Board APP Test : GPIO ADC OLED OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -197,7 +197,7 @@ int __init main(int argc, char const *argv[])
 #endif
 	
 #if 1
-	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 4, 1);
+	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 5, 0);
      printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
@@ -244,7 +244,7 @@ int __init main(int argc, char const *argv[])
 	S3C2440_LCDTest();
 #endif
 	
-#if 0
+#if 1
 	S3C2440_AdcInitialized();
 #endif
 #if 0
@@ -278,14 +278,26 @@ int __init main(int argc, char const *argv[])
 	S3C2440_OLEDPrint(6, 0, OLEDStr);
 #endif
 	
+#if 1
+	S3C2440_OLEDPrint(0, 0, "JZ2440 Board V31");
+	S3C2440_OLEDPrint(2, 0, "OLED ADC");
+#endif
+	
 	while (true) {
 		
-#if 0
+#if 1
 		int    val;
 		double vol;
 		val = S3C2440_AdcRead_AIN0();
 		vol = (double)val/1023*3.3;
 		printf("vol: %fv\r", vol);
+#endif
+		
+#if 1
+		char OLEDADCStr[16];
+		sprintf(OLEDADCStr, "ADC: %.3fV", vol);
+		S3C2440_OLEDPrint(4, 0, "ADC Read:");
+		S3C2440_OLEDPrint(6, 0, OLEDADCStr);
 #endif
 		
 #if 0
