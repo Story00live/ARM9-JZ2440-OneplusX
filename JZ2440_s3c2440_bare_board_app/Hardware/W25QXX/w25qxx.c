@@ -14,6 +14,7 @@
 
 #include "w25qxx.h"
 #include "spi_gpio.h"
+#include "spi_s3c2440.h"
 
 /**********************************************************************************************************
  @Function			static void S3C2440_W25QXX_SET_CS(bool val)

@@ -15,6 +15,7 @@
 #include "oled.h"
 #include "oledfont.h"
 #include "spi_gpio.h"
+#include "spi_s3c2440.h"
 
 /**********************************************************************************************************
  @Function			static void S3C2440_OLED_GPIO_Init(void)
