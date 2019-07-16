@@ -21,6 +21,8 @@
 			 "${workspaceFolder}/Hardware/TOUCH",
 			 "${workspaceFolder}/Hardware/UART",
 			 "${workspaceFolder}/Hardware/W25QXX",
+			 "${workspaceFolder}/Hardware/DHT11",
+			 "${workspaceFolder}/Hardware/DS18B20",
 			 "${workspaceFolder}/Libraries/Standard",
 			 "${workspaceFolder}/Libraries/Stdio",
 			 "${workspaceFolder}/Libraries/String",

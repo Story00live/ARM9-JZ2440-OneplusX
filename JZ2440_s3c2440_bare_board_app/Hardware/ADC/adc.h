@@ -3,7 +3,10 @@
 
 #include "s3c2440_soc.h"
 
-void S3C2440_AdcInitialized(void);
-int  S3C2440_AdcRead_AIN0(void);
+#define S3C2440_ADC_AIN0			0
+#define S3C2440_ADC_AIN1			1
+
+void S3C2440_AdcInitialized(int channel);
+int  S3C2440_AdcRead(int channel);
 
 #endif /* __S3C2440_ADC_H */

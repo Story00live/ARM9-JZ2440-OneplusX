@@ -21,6 +21,8 @@
 
 S3C2440_Timer_Desc				S3C2440_Timer_IRQ_Func_Array[TIMER_NUM];		//32个定时器中断源执行函数数组
 
+static unsigned long long		S3C2440_System_Time0_10ms_cnt = 0;
+
 /**********************************************************************************************************
  @Function			void S3C2440_TIMER0_Init(void)
  @Description			S3C2440_TIMER0_Init
@@ -34,17 +36,17 @@ void S3C2440_TIMER0_Init(void)
 	/* -Timer input clock Frequency = PCLK / {prescaler value+1} / {divider value}-
 	 * -{prescaler value} = 0~255-
 	 * -{divider value} = 2, 4, 8, 16-
-	 * -Timer clk = 50000000 / (49 + 1) / 16-
-	 * -          = 62500-
+	 * -Timer clk = 50000000 / (4 + 1) / 2-
+	 * -          = 5000000-
 	 */
 	TCFG0 &= ~((255 & 0xFF) << 0);
-	TCFG0 |=  ((49  & 0xFF) << 0);										/* Prescaler 0 = 49, 用于timer0,1 */
+	TCFG0 |=  ((4   & 0xFF) << 0);										/* Prescaler 0 = 4, 用于timer0,1 */
 	
 	TCFG1 &= ~(0x0F << 0);
-	TCFG1 |=  (0x03 << 0);												/* MUX 0 : 0011 = 1/16 */
+	TCFG1 |=  (0x00 << 0);												/* MUX 0 : 0000 = 1/2 */
 	
 	/* -设置TIM0初值- */
-	TCNTB0 = 625;														/* 10毫秒中断一次 */
+	TCNTB0 = 50000;													/* 10毫秒中断一次 */
 	
 	/* -加载初值, 启动TIM0- */
 	TCON |=  (1<<1);													/* Update from TCNTB0 & TCMPB0 */
@@ -70,19 +72,19 @@ void S3C2440_TIMER1_Init(void)
 	/* -Timer input clock Frequency = PCLK / {prescaler value+1} / {divider value}-
 	 * -{prescaler value} = 0~255-
 	 * -{divider value} = 2, 4, 8, 16-
-	 * -Timer clk = 50000000 / (49 + 1) / 16-
-	 * -          = 62500-
+	 * -Timer clk = 50000000 / (4 + 1) / 2-
+	 * -          = 5000000-
 	 */
 	TCFG0 &= ~((255 & 0xFF) << 0);
-	TCFG0 |=  ((49  & 0xFF) << 0);										/* Prescaler 0 = 49, 用于timer0,1 */
+	TCFG0 |=  ((4   & 0xFF) << 0);										/* Prescaler 0 = 4, 用于timer0,1 */
 	
 	TCFG1 &= ~(0x0F << 4);
-	TCFG1 |=  (0x03 << 4);												/* MUX 1 : 0011 = 1/16 */
+	TCFG1 |=  (0x00 << 4);												/* MUX 1 : 0000 = 1/2 */
 	
 	/* -设置TIM1初值- */
-	TCNTB1 = 6250;														/* 100毫秒中断一次 */
+	TCNTB1 = 5000;														/* 1毫秒中断一次 */
 	
-	/* -加载初值, 启动TIM0- */
+	/* -加载初值, 启动TIM1- */
 	TCON |=  (1<<9);													/* Update from TCNTB1 & TCMPB1 */
 	
 	/* -设置为自动加载并启动- */
@@ -153,6 +155,76 @@ void S3C2440_TIMER_Irq(unsigned int irqBit)
 }
 
 /**********************************************************************************************************
+ @Function			void S3C2440_TIMER0_uDelay(int unCount)
+ @Description			S3C2440_TIMER0_uDelay
+ @Input				unCount
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_TIMER0_uDelay(int unCount)
+{
+	int uscnt = unCount * 5;
+	int pre = TCNTO0;
+	int cur;
+	int delta;
+	
+	while (uscnt > 0) {
+		cur = TCNTO0;
+		if (cur <= pre)
+			delta = pre - cur;
+		else
+			delta = pre + (50000 - cur);
+		uscnt = uscnt - delta;
+		pre = cur;
+	}
+}
+
+/**********************************************************************************************************
+ @Function			void S3C2440_TIMER0_mDelay(int muCount)
+ @Description			S3C2440_TIMER0_uDelay
+ @Input				muCount
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_TIMER0_mDelay(int muCount)
+{
+	S3C2440_TIMER0_uDelay(muCount * 1000);
+}
+
+/**********************************************************************************************************
+ @Function			unsigned long long S3C2440_TIMER0_GetSystem_TimeUs(void)
+ @Description			S3C2440_TIMER0_GetSystem_TimeUs
+ @Input				void
+ @Return				SystemUs
+**********************************************************************************************************/
+unsigned long long S3C2440_TIMER0_GetSystem_TimeUs(void)
+{
+	unsigned long long us = (50000 - TCNTO0) / 5;
+	return S3C2440_System_Time0_10ms_cnt * 10 * 1000 + us;
+}
+
+/**********************************************************************************************************
+ @Function			unsigned long long S3C2440_TIMER0_Delta_TimeUs(unsigned long long pre, unsigned long long now)
+ @Description			S3C2440_TIMER0_Delta_TimeUs
+ @Input				pre
+					now
+ @Return				DeltaUs
+**********************************************************************************************************/
+unsigned long long S3C2440_TIMER0_Delta_TimeUs(unsigned long long pre, unsigned long long now)
+{
+	return (now - pre);
+}
+
+/**********************************************************************************************************
+ @Function			void S3C2440_TIMER0_System_10ms_Irq(void)
+ @Description			S3C2440_TIMER0_System_10ms_Irq
+ @Input				void
+ @Return				void
+**********************************************************************************************************/
+void S3C2440_TIMER0_System_10ms_Irq(void)
+{
+	S3C2440_System_Time0_10ms_cnt++;
+}
+
+/**********************************************************************************************************
  @Function			void S3C2440_TIMER0_LED_Irq_Demo(void)
  @Description			S3C2440_TIMER0_LED_Irq_Demo
  @Input				void
@@ -183,7 +255,7 @@ void S3C2440_TIMER1_LED_Irq_Demo(void)
 	static char nCount1 = 0;
 	static char tTimer1 = 0;
 	
-	if (tTimer1++ < 2) return;
+	if (tTimer1++ < 200) return;
 	
 	tTimer1 = 0;
 	nCount1++;

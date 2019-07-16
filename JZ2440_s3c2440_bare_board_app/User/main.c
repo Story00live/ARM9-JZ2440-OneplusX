@@ -28,6 +28,8 @@
 #include "i2c.h"
 #include "oled.h"
 #include "w25qxx.h"
+#include "dht11.h"
+#include "ds18b20.h"
 #include "norflash.h"
 #include "nandflash.h"
 #include "sdram.h"
@@ -38,6 +40,7 @@
 #include "lcddemo.h"
 #include "touchscreendemo.h"
 #include "at24cxxdemo.h"
+#include "photoresistordemo.h"
 
 #if 0
 /**********************************************************************************************************
@@ -147,7 +150,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Bare Board APP Test : GPIO ADC OLED OK!!\r\n";
+char* str = "JZ2440 Bare Board APP Test : System Irda OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -160,8 +163,11 @@ int __init main(int argc, char const *argv[])
 	S3C2440_LedInitialized();
 	S3C2440_KeyInitialized();
 	S3C2440_Uart0Initialized();
+	
+#if 0
 	S3C2440_OLEDInitialized();
 	S3C2440_W25QxxInitialized();
+#endif
 	
 #if 1
 	/* -初始化外部中断- */
@@ -187,6 +193,8 @@ int __init main(int argc, char const *argv[])
 	S3C2440_EXTI_Register("LED3_EXTI", EINT8_23, S3C2440_EXTI_LED3_Irq_Demo);
 	
 	/* -注册Timer0中断执行函数- */
+	S3C2440_TIMER_Register("SYST_TIMER", INT_TIMER0, S3C2440_TIMER0_System_10ms_Irq);
+	/* -注册Timer0中断执行函数- */
 	S3C2440_TIMER_Register("LED0_TIMER", INT_TIMER0, S3C2440_TIMER0_LED_Irq_Demo);
 	/* -注册Timer1中断执行函数- */
 	S3C2440_TIMER_Register("LED1_TIMER", INT_TIMER1, S3C2440_TIMER1_LED_Irq_Demo);
@@ -197,7 +205,7 @@ int __init main(int argc, char const *argv[])
 #endif
 	
 #if 1
-	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 5, 0);
+	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 8, 0);
      printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
@@ -244,8 +252,8 @@ int __init main(int argc, char const *argv[])
 	S3C2440_LCDTest();
 #endif
 	
-#if 1
-	S3C2440_AdcInitialized();
+#if 0
+	S3C2440_AdcInitialized(S3C2440_ADC_AIN0);
 #endif
 #if 0
 	S3C2440_TouchScreen_Init();
@@ -278,26 +286,58 @@ int __init main(int argc, char const *argv[])
 	S3C2440_OLEDPrint(6, 0, OLEDStr);
 #endif
 	
-#if 1
+#if 0
 	S3C2440_OLEDPrint(0, 0, "JZ2440 Board V31");
 	S3C2440_OLEDPrint(2, 0, "OLED ADC");
 #endif
 	
+#if 0
+	S3C2440_PhotoresistorTest();
+#endif
+	
+#if 0
+	S3C2440_DHT11Initialized();
+#endif
+	
+#if 0
+	S3C2440_DS18B20Initialized();
+#endif
+	
 	while (true) {
 		
-#if 1
+#if 0
 		int    val;
 		double vol;
-		val = S3C2440_AdcRead_AIN0();
+		val = S3C2440_AdcRead(S3C2440_ADC_AIN0);
 		vol = (double)val/1023*3.3;
 		printf("vol: %fv\r", vol);
 #endif
 		
-#if 1
+#if 0
 		char OLEDADCStr[16];
 		sprintf(OLEDADCStr, "ADC: %.3fV", vol);
 		S3C2440_OLEDPrint(4, 0, "ADC Read:");
 		S3C2440_OLEDPrint(6, 0, OLEDADCStr);
+#endif
+		
+#if 0
+		int thum, temp;
+		if (S3C2440_DHT11Read(&thum, &temp) != 0) {
+			printf("\r\nDHT11 Read Err!\r\n");
+		}
+		else {
+			printf("\r\nDHT11 : %d humidity, %d temperature\r\n", thum, temp);
+		}
+#endif
+		
+#if 0
+		double temp;
+		if (S3C2440_DS18B20ReadTemperature(&temp) != 0) {
+			printf("\r\nDS18B20 Read Err!\r\n");
+		}
+		else {
+			printf("\r\nDS18B20 Temperature: %.4f\r\n", temp);
+		}
 #endif
 		
 #if 0
@@ -352,7 +392,7 @@ int __init main(int argc, char const *argv[])
 		S3C2440_LED3_ON();
 		delay_simulate(0x0003FFFF);
 #else
-		delay_simulate(0x0003FFFF);
+		S3C2440_TIMER0_mDelay(1000);
 #endif
 		
 #if 0

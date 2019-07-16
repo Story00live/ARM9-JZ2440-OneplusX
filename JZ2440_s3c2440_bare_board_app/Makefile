@@ -102,6 +102,8 @@ DOBJS             += Hardware/SPI/spi_gpio.o
 DOBJS             += Hardware/SPI/spi_s3c2440.o
 DOBJS             += Hardware/OLED/oled.o
 DOBJS             += Hardware/W25QXX/w25qxx.o
+DOBJS             += Hardware/DHT11/dht11.o
+DOBJS             += Hardware/DS18B20/ds18b20.o
 
 LOBJS             += Libraries/Stdio/stdio.o
 LOBJS             += Libraries/String/string.o
@@ -112,6 +114,7 @@ AOBJS             += User/norflashdemo.o
 AOBJS             += User/lcddemo.o
 AOBJS             += User/touchscreendemo.o
 AOBJS             += User/at24cxxdemo.o
+AOBJS             += User/photoresistordemo.o
 AOBJS             += User/main.o
 
 OBJS              := $(SOBJS) $(COBJS) $(DOBJS) $(LOBJS) $(AOBJS)
@@ -142,6 +145,8 @@ INCLUDE           += -I./Hardware/AT24CXX
 INCLUDE           += -I./Hardware/SPI
 INCLUDE           += -I./Hardware/OLED
 INCLUDE           += -I./Hardware/W25QXX
+INCLUDE           += -I./Hardware/DHT11
+INCLUDE           += -I./Hardware/DS18B20
 INCLUDE           += -I./Libraries/Stdio
 INCLUDE           += -I./Libraries/String
 INCLUDE           += -I./Libraries/Standard

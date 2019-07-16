@@ -15,12 +15,12 @@
 #include "adc.h"
 
 /**********************************************************************************************************
- @Function			void S3C2440_AdcInitialized(void)
+ @Function			void S3C2440_AdcInitialized(int channel)
  @Description			S3C2440_AdcInitialized
- @Input				void
+ @Input				channel
  @Return				void
 **********************************************************************************************************/
-void S3C2440_AdcInitialized(void)
+void S3C2440_AdcInitialized(int channel)
 {
 	/* -[15:15] : ECFLG, 1 = End of A/D conversion 0 = A/D conversion in process-
 	 * -[14:14] : PRSCEN, 1 = A/D converter prescaler enable 0 disable-
@@ -30,20 +30,22 @@ void S3C2440_AdcInitialized(void)
 	 * -[01:01] : READ_ START, A/D conversion start by read-
 	 * -[00:00] : ENABLE_START, A/D conversion starts by enable-
 	 */
-	ADCCON = (1<<14) | (49<<6) | (0<<3);
+	ADCCON = (1<<14) | (49<<6) | (channel<<3);
 	
 	ADCDLY = 0x00FF;
 }
 
 /**********************************************************************************************************
- @Function			int S3C2440_AdcRead_AIN0(void)
- @Description			S3C2440_AdcRead_AIN0
- @Input				void
+ @Function			int S3C2440_AdcRead(int channel)
+ @Description			S3C2440_AdcRead
+ @Input				channel
  @Return				void
 **********************************************************************************************************/
-int S3C2440_AdcRead_AIN0(void)
+int S3C2440_AdcRead(int channel)
 {
 	int adcval = 0;
+	
+	S3C2440_AdcInitialized(channel);
 	
 	/* 启动ADC */
 	ADCCON |=  (1<<0);
