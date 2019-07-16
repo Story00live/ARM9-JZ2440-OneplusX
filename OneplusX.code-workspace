@@ -74,6 +74,9 @@
 		},
 		{
 			"path": "JZ2440_s3c2440_bare_board_app"
+		},
+		{
+			"path": "u-boot-1.1.6"
 		}
 	],
 	"settings": {
