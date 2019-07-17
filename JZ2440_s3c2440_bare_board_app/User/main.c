@@ -150,7 +150,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Bare Board APP Test : System Irda OK!!\r\n";
+char* str = "JZ2440 Bare Board APP Test : Boot OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -205,7 +205,7 @@ int __init main(int argc, char const *argv[])
 #endif
 	
 #if 1
-	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 8, 0);
+	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 0, 1);
      printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
