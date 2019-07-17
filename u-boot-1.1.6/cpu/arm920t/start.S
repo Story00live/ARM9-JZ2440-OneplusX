@@ -1,8 +1,8 @@
 /*
  *  armboot - Startup Code for ARM920 CPU-core
  *
- *  Copyright (c) 2001	Marius Gröger <mag@sysgo.de>
- *  Copyright (c) 2002	Alex Züpke <azu@sysgo.de>
+ *  Copyright (c) 2001	Marius GrÃ¶ger <mag@sysgo.de>
+ *  Copyright (c) 2002	Alex ZÃ¼pke <azu@sysgo.de>
  *  Copyright (c) 2002	Gary Jennejohn <gj@denx.de>
  *
  * See file CREDITS for list of people who contributed to this
@@ -43,10 +43,10 @@
 #define REFRESH        (0x48000024)
 #define MISCCR         (0x56000080)
 
-#define LOCKTIME	0x4C000000	/* R/W, PLL lock time count register */
+#define LOCKTIME		0x4C000000	/* R/W, PLL lock time count register */
 #define MPLLCON		0x4C000004	/* R/W, MPLL configuration register */
 #define UPLLCON		0x4C000008	/* R/W, UPLL configuration register */
-#define CLKCON		0x4C00000C	/* R/W, Clock generator control reg. */
+#define CLKCON			0x4C00000C	/* R/W, Clock generator control reg. */
 #define CLKSLOW		0x4C000010	/* R/W, Slow clock control register */
 #define CLKDIVN		0x4C000014	/* R/W, Clock divider control */
 
@@ -63,11 +63,11 @@ _start:	b       reset
 
 _undefined_instruction:	.word undefined_instruction
 _software_interrupt:	.word software_interrupt
-_prefetch_abort:	.word prefetch_abort
-_data_abort:		.word data_abort
-_not_used:		.word not_used
-_irq:			.word irq
-_fiq:			.word fiq
+_prefetch_abort:		.word prefetch_abort
+_data_abort:			.word data_abort
+_not_used:			.word not_used
+_irq:				.word irq
+_fiq:				.word fiq
 
 	.balignl 16,0xdeadbeef
 
@@ -90,18 +90,18 @@ _TEXT_BASE:
 
 .globl _armboot_start
 _armboot_start:
-	.word _start
+	.word	_start
 
 /*
  * These are defined in the board-specific linker script.
  */
 .globl _bss_start
 _bss_start:
-	.word __bss_start
+	.word 	__bss_start
 
 .globl _bss_end
 _bss_end:
-	.word _end
+	.word 	_end
 
 .globl FREE_RAM_END
 FREE_RAM_END:
@@ -124,7 +124,7 @@ IRQ_STACK_START:
 /* IRQ stack memory (calculated at run-time) */
 .globl FIQ_STACK_START
 FIQ_STACK_START:
-	.word 0x0badc0de
+	.word	0x0badc0de
 #endif
 
 
@@ -145,13 +145,13 @@ reset:
 #if defined(CONFIG_S3C2400)
 # define pWTCON		0x15300000
 # define INTMSK		0x14400008	/* Interupt-Controller base addresses */
-# define CLKDIVN	0x14800014	/* clock divisor register */
+# define CLKDIVN		0x14800014	/* clock divisor register */
 #elif defined(CONFIG_S3C2410)
 # define pWTCON		0x53000000
-# define INTMOD     0X4A000004
+# define INTMOD     	0X4A000004
 # define INTMSK		0x4A000008	/* Interupt-Controller base addresses */
-# define INTSUBMSK	0x4A00001C
-# define CLKDIVN	0x4C000014	/* clock divisor register */
+# define INTSUBMSK		0x4A00001C
+# define CLKDIVN		0x4C000014	/* clock divisor register */
 #endif
 
 #if defined(CONFIG_S3C2400) || defined(CONFIG_S3C2410)
@@ -182,10 +182,10 @@ reset:
 
 #ifndef CONFIG_SKIP_LOWLEVEL_INIT
 #if 0
-		/* ÕâÐ©´úÂë»áÊ¹ÓÃSP,ÔÚNANDÆô¶¯Ê±»áÆÆ»µÆ¬ÄÚÄÚ´æµÄ²¿·Ö´úÂë
-         * µ¼ÖÂNANDÆô¶¯Ê±ÎÞ·¨Ê¹ÓÃÐÝÃß-»½ÐÑ¹¦ÄÜ
+		/* ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½SP,ï¿½ï¿½NANDï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Æ»ï¿½Æ¬ï¿½ï¿½ï¿½Ú´ï¿½Ä²ï¿½ï¿½Ö´ï¿½ï¿½ï¿½
+         * ï¿½ï¿½ï¿½ï¿½NANDï¿½ï¿½ï¿½ï¿½Ê±ï¿½Þ·ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½
          */
-		/* ÉèÖÃSPÖ¸ÏòÆ¬ÄÚÄÚ´æ */
+		/* ï¿½ï¿½ï¿½ï¿½SPÖ¸ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½Ú´ï¿½ */
 		ldr sp, =4092
 		ldr r0, =0x12345678
 		str r0, [sp]
@@ -194,7 +194,7 @@ reset:
 		ldrne sp, =0x40000000+4096
 		bl clock_init
 #else
-	/* ÉèÖÃÊ±ÖÓ, Ê¹ÓÃ»ã±à */
+	/* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½, Ê¹ï¿½Ã»ï¿½ï¿½ */
 #define S3C2440_MPLL_400MHZ     ((0x5c<<12)|(0x01<<4)|(0x01))
 #define S3C2440_UPLL_48MHZ      ((0x38<<12)|(0x02<<4)|(0x02))
 #define S3C2440_CLKDIV          (0x05) // | (1<<3))    /* FCLK:HCLK:PCLK = 1:4:8, UCLK = UPLL/2 */
@@ -237,7 +237,7 @@ reset:
 #endif
 #endif    
 
-	/* 2. ¸ù¾Ý GSTATUS2[1]ÅÐ¶ÏÊÇ¸´Î»»¹ÊÇ»½ÐÑ */	
+	/* 2. ï¿½ï¿½ï¿½ï¿½ GSTATUS2[1]ï¿½Ð¶ï¿½ï¿½Ç¸ï¿½Î»ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ */	
 	ldr r0, =GSTATUS2
 	ldr r1, [r0]
 	tst r1, #(1<<1)  /* r1 & (1<<1) */
@@ -332,25 +332,25 @@ SetLoadFlag:
 
 _start_armboot:	.word start_armboot
 
-/* 1. °´ÏÂ°´¼ü */
+/* 1. ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ */
 wake_up:
 	str r1, [r0]  /* clear GSTATUS2 */
-	/* 3. ÉèÖÃ MISCCR[19:17]=000b, ÒÔÊÍ·ÅSDRAMÐÅºÅ */
+	/* 3. ï¿½ï¿½ï¿½ï¿½ MISCCR[19:17]=000b, ï¿½ï¿½ï¿½Í·ï¿½SDRAMï¿½Åºï¿½ */
 	ldr r0, =MISCCR
 	ldr r1, [r0]
 	bic r1, r1, #(7<<17)
 	str r1, [r0]
 		
-	/* 4. ÅäÖÃs3c2440µÄmemory controller */
+	/* 4. ï¿½ï¿½ï¿½ï¿½s3c2440ï¿½ï¿½memory controller */
 	bl	cpu_init_crit
 	
-	/* 5. µÈ´ýSDRAMÍË³öself-refresh mode */
+	/* 5. ï¿½È´ï¿½SDRAMï¿½Ë³ï¿½self-refresh mode */
 	mov r0, #1000
 1:	subs r0, r0, #1
 	cmp r0, #0
 	bne 1b
 	
-	/* 6. ¸ù¾ÝGSTATUS[3:4]µÄÖµÀ´ÔËÐÐÐÝÃßÇ°µÄº¯Êý */
+	/* 6. ï¿½ï¿½ï¿½ï¿½GSTATUS[3:4]ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½Äºï¿½ï¿½ï¿½ */
 	ldr r0, =GSTATUS3
 	ldr r1, [r0]
 	mov pc, r1

@@ -8,6 +8,9 @@
 # (C) 2002-2006 DENX Software Engineering, Wolfgang Denk <wd@denx.de>
 #
 
+# mkconfig     100ask24x0_config     arm arm920t 100ask24x0 NULL s3c24x0
+# $0           $1                    $2  $3      $4         $5   $6
+
 APPEND=no	# Default: Create new config file
 BOARD_NAME=""	# Name to print in make output
 
@@ -22,8 +25,12 @@ done
 
 [ "${BOARD_NAME}" ] || BOARD_NAME="$1"
 
+# BOARD_NAME = "$1" = 100ask24x0_config
+
 [ $# -lt 4 ] && exit 1
 [ $# -gt 6 ] && exit 1
+
+# Parameter < 4 or Parameter > 6 ===> Exit
 
 echo "Configuring for ${BOARD_NAME} board..."
 
@@ -46,19 +53,29 @@ else
 	cd ./include
 	rm -f asm
 	ln -s asm-$2 asm
+	
+	# cd ./include
+	# rm -f asm(link file)
+	# Creat asm(link file) ---> asm-$2 = asm-arm
 fi
 
 rm -f asm-$2/arch
+
+# rm -f asm-arm/arch
 
 if [ -z "$6" -o "$6" = "NULL" ] ; then
 	ln -s ${LNPREFIX}arch-$3 asm-$2/arch
 else
 	ln -s ${LNPREFIX}arch-$6 asm-$2/arch
+	
+	# Creat asm-arm/arch(link file) ---> arch-s3c24x0
 fi
 
 if [ "$2" = "arm" ] ; then
 	rm -f asm-$2/proc
 	ln -s ${LNPREFIX}proc-armv asm-$2/proc
+	
+	# Creat asm-arm/proc(link file) ---> proc-armv
 fi
 
 #
@@ -68,9 +85,22 @@ echo "ARCH   = $2" >  config.mk
 echo "CPU    = $3" >> config.mk
 echo "BOARD  = $4" >> config.mk
 
+# ARCH       = arm
+# CPU        = arm920t
+# BOARD      = 100ask24x0
+# all prarameter add to "config.mk" file on
+
 [ "$5" ] && [ "$5" != "NULL" ] && echo "VENDOR = $5" >> config.mk
 
 [ "$6" ] && [ "$6" != "NULL" ] && echo "SOC    = $6" >> config.mk
+
+# hava $6 = s3c24x0, so "SOC     = s3c24x0" add to "config.mk" file on
+
+# "config.mk:"
+# ARCH   = arm
+# CPU    = arm920t
+# BOARD  = 100ask24x0
+# SOC    = s3c24x0
 
 #
 # Create board specific header file
@@ -83,5 +113,9 @@ else
 fi
 echo "/* Automatically generated - do not edit */" >>config.h
 echo "#include <configs/$1.h>" >>config.h
+
+# "config.h:"
+# /* Automatically generated - do not edit */
+# #include <configs/100ask24x0.h>
 
 exit 0

@@ -166,7 +166,14 @@ include $(TOPDIR)/config.mk
 #########################################################################
 # U-Boot objects....order is important (i.e. start must be first)
 
+# ARCH   = arm
+# CPU    = arm920t
+# BOARD  = 100ask24x0
+# SOC    = s3c24x0
+
 OBJS  = cpu/$(CPU)/start.o
+#     = cpu/arm920t/start.o
+
 ifeq ($(CPU),i386)
 OBJS += cpu/$(CPU)/start16.o
 OBJS += cpu/$(CPU)/reset.o
@@ -265,6 +272,46 @@ $(obj)u-boot:		depend version $(SUBDIRS) $(OBJS) $(LIBS) $(LDSCRIPT)
 		cd $(LNDIR) && $(LD) $(LDFLAGS) $$UNDEF_SYM $(__OBJS) \
 			--start-group $(__LIBS) --end-group $(PLATFORM_LIBS) \
 			-Map u-boot.map -o u-boot
+
+
+#cd /home/kyj/ARM9/Workspace/UBoot/u-boot-1.1.6 && 
+#
+#	   arm-linux-ld 
+#
+#       -Bstatic -T 
+#       /home/kyj/ARM9/Workspace/UBoot/u-boot-1.1.6/board/100ask24x0/u-boot.lds 
+#
+#       -Ttext 0x33F80000  
+#       $UNDEF_SYM cpu/arm920t/start.o \
+#
+#       --start-group 
+#       lib_generic/libgeneric.a board/100ask24x0/lib100ask24x0.a 
+#       cpu/arm920t/libarm920t.a 
+#       cpu/arm920t/s3c24x0/libs3c24x0.a 
+#       lib_arm/libarm.a 
+#       fs/cramfs/libcramfs.a 
+#       fs/fat/libfat.a fs/fdos/libfdos.a 
+#       fs/jffs2/libjffs2.a 
+#       fs/reiserfs/libreiserfs.a 
+#       fs/ext2/libext2fs.a 
+#       net/libnet.a 
+#       disk/libdisk.a 
+#       rtc/librtc.a 
+#       dtt/libdtt.a 
+#       drivers/libdrivers.a 
+#       drivers/nand/libnand.a 
+#       drivers/nand_legacy/libnand_legacy.a 
+#       drivers/usb/libusb.a drivers/sk98lin/libsk98lin.a 
+#       common/libcommon.a 
+#
+#       --end-group  \
+#       -Map u-boot.map 
+#       -o u-boot
+#
+#arm-linux-objcopy --gap-fill=0xff -O srec u-boot u-boot.srec
+#
+#arm-linux-objcopy --gap-fill=0xff -O binary u-boot u-boot.bin
+
 
 $(OBJS):
 	echo $(OBJS)	
@@ -1886,6 +1933,9 @@ smdk2410_config	:	unconfig
 
 100ask24x0_config	:	unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm920t 100ask24x0 NULL s3c24x0
+
+# @$(MKCONFIG) $(@:_config=) arm arm920t 100ask24x0 NULL s3c24x0
+# mkconfig     100ask24x0_config     arm arm920t 100ask24x0 NULL s3c24x0
 
 SX1_config :		unconfig
 	@$(MKCONFIG) $(@:_config=) arm arm925t sx1
