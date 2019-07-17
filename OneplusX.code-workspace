@@ -74,9 +74,6 @@
 		},
 		{
 			"path": "JZ2440_s3c2440_bare_board_app"
-		},
-		{
-			"path": "u-boot-1.1.6"
 		}
 	],
 	"settings": {
@@ -138,7 +135,8 @@
 			"oled.h": "c",
 			"oledfont.h": "c",
 			"w25qxx.h": "c",
-			"norflash.h": "c"
+			"norflash.h": "c",
+			"common.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}
