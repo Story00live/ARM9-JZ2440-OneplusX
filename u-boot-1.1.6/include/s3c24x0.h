@@ -1,6 +1,6 @@
 /*
  * (C) Copyright 2003
- * David Müller ELSOFT AG Switzerland. d.mueller@elsoft.ch
+ * David Mï¿½ller ELSOFT AG Switzerland. d.mueller@elsoft.ch
  *
  * See file CREDITS for list of people who contributed to this
  * project.
@@ -126,6 +126,7 @@ typedef struct {
 	S3C24X0_REG32	CLKCON;
 	S3C24X0_REG32	CLKSLOW;
 	S3C24X0_REG32	CLKDIVN;
+	S3C24X0_REG32  CAMDIVN;    /* for s3c2440, by www.100ask.net */
 } /*__attribute__((__packed__))*/ S3C24X0_CLOCK_POWER;
 
 
