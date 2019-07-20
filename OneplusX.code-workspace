@@ -142,7 +142,8 @@
 			"oledfont.h": "c",
 			"w25qxx.h": "c",
 			"norflash.h": "c",
-			"common.h": "c"
+			"common.h": "c",
+			"bootdemo.h": "c"
 		},
 		"C_Cpp.default.cStandard": "c99",
 	}

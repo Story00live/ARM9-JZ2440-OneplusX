@@ -115,6 +115,7 @@ AOBJS             += User/lcddemo.o
 AOBJS             += User/touchscreendemo.o
 AOBJS             += User/at24cxxdemo.o
 AOBJS             += User/photoresistordemo.o
+AOBJS             += User/bootdemo.o
 AOBJS             += User/main.o
 
 OBJS              := $(SOBJS) $(COBJS) $(DOBJS) $(LOBJS) $(AOBJS)

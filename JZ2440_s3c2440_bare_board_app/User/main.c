@@ -41,6 +41,7 @@
 #include "touchscreendemo.h"
 #include "at24cxxdemo.h"
 #include "photoresistordemo.h"
+#include "bootdemo.h"
 
 #if 0
 /**********************************************************************************************************
@@ -150,7 +151,7 @@ char  ch2 = 'A';
 char  ch3 = 0;
 char  chscanf = 0;
 int   it4 = 0;
-char* str = "JZ2440 Bare Board APP Test : Boot OK!!\r\n";
+char* str = "JZ2440 Bare Board APP Test : Boot Start run to Kernel Image OK!!\r\n";
 
 /**********************************************************************************************************
  @Function			int main(int argc, char const *argv[])
@@ -205,7 +206,7 @@ int __init main(int argc, char const *argv[])
 #endif
 	
 #if 1
-	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 0, 1);
+	printfln("JZ2440 ARM920T S3C2440A V%d.%d", 0, 3);
      printfln("Copyright (C) 2019 Design by Kangkang\r\n");
 	printfln("%s", str);
 #if 0
@@ -301,6 +302,26 @@ int __init main(int argc, char const *argv[])
 	
 #if 0
 	S3C2440_DS18B20Initialized();
+#endif
+	
+#if 1
+	void (*theKernel)(int zero, int arch, unsigned int params);
+	
+	/* -1. 读取Nand Flash中Kernel到SDRAM中- */
+	S3C2440_NandFlash_Read((unsigned int)(0x00060000 + 64), (unsigned char*)(0x30008000), 0x00200000);
+	printfln("[Boot: Copy Kernel from Nand Flash.]\r\n");
+	
+	/* -2. 设置Kernel运行参数- */
+	S3C2440_Boot_Setup_startTag();
+	S3C2440_Boot_Setup_memoryTag();
+	S3C2440_Boot_Setup_commandlineTag("noinitrd root=/dev/mtdblock3 init=/linuxrc console=ttySAC0,115200");
+	S3C2440_Boot_Setup_endTag();
+	printfln("[Boot: Set Boot Params.]\r\n");
+	
+	/* -3. 跳转Kernel中执行- */
+	printfln("[Boot: Boot Kernel.]\r\n");
+	theKernel = (void (*)(int, int, unsigned int))0x30008000;
+	theKernel(0, 362, 0x30000100);
 #endif
 	
 	while (true) {

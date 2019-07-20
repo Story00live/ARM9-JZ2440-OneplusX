@@ -119,10 +119,10 @@ reset:
 		bl		S3C2440_Initialized_SDRAM
 		
 		/* -创建页表- */
-		bl		S3C2440_MMU_CreatPageTable
+		@ bl		S3C2440_MMU_CreatPageTable
 		
 		/* -启动MMU- */
-		bl		S3C2440_MMU_Enable
+		@ bl		S3C2440_MMU_Enable
 		
 		/* -重定位text, rodata, data段- */
 		bl		S3C2440_Initialized_CopyCodeData
@@ -133,11 +133,11 @@ reset:
 		/* -复位之后CPU处于SCV管理模式-
 		 * -切换到USR用户模式-
 		 */
-		mrs		r0,		cpsr											/* 读取CPSR值 */
-		bic		r0,		r0,	#0x0000001F								/* 低5位清0, M4~M0:00000, 去除当前处理器模式 */
-		orr		r0,		r0,	#0x00000010								/* M4~M0:10000, 设置为用户模式 */
-		bic		r0,		r0,	#0x00000080								/* 第7位清0, 开启IRQ中断 */
-		msr		cpsr_c,	r0											/* 修改CPSR中的控制位 */
+		@ mrs		r0,		cpsr											/* 读取CPSR值 */
+		@ bic		r0,		r0,	#0x0000001F								/* 低5位清0, M4~M0:00000, 去除当前处理器模式 */
+		@ orr		r0,		r0,	#0x00000010								/* M4~M0:10000, 设置为用户模式 */
+		@ bic		r0,		r0,	#0x00000080								/* 第7位清0, 开启IRQ中断 */
+		@ msr		cpsr_c,	r0											/* 修改CPSR中的控制位 */
 		
 		/* -设置USR用户模式: 栈SP- */
 		ldr		sp,		=0x34000000
@@ -153,13 +153,14 @@ sdramCode:
 		
 /********************************************* swi exception *********************************************/
 		/* -触发SWI异常, 使CPU触发Software Interrupt软件中断异常, 进入0x00000008执行- */
-		@ swi		0x00000123
+		@ swi	0x00000123
 /********************************************* swi exception *********************************************/
 		
 		/* -调用main函数- */
 		@ bl		main													/* 使用BL命令相对跳转, 跳转地址为当前地址PC+偏移量OFFSET, 不为SDRAM中实际运行地址 */
 		
 		/* -调用main函数- */
+		ldr		lr,		=halt										/* 保存main函数返回时, 运行地址 */
 		ldr		pc,		=main										/* main地址载入PC, PC为下一条程序运行地址, 绝对跳转, 跳转到SDRAM */
 		
 halt:
